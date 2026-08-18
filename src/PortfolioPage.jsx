@@ -7,7 +7,7 @@ const projects = [
     summary:
       'A wireless-controlled vehicle using Arduino, NRF24L01 communication, motor drivers, and servo control.',
     description:
-      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with [...]',
+      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with Arduino Based',
     technologies: ['Arduino', 'C++', 'NRF24L01', 'L298N'],
     github: 'https://github.com/ririxd',
   },
@@ -17,8 +17,7 @@ const projects = [
     summary:
       'A software application designed to manage hardware items, quantities, records, and inventory information.',
     description:
-      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical usability and e[...]',
-    technologies: ['Python', 'SQLite', 'CRUD'],
+      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical technologies: ['Python', 'SQLite', 'CRUD'],
     github: 'https://github.com/ririxd/sample-programs--py-db-sqlite3-',
   },
   {
@@ -27,7 +26,7 @@ const projects = [
     summary:
       'Schematic capture and PCB layout for custom electronics circuits with practical hardware design and electrical planning.',
     description:
-      'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-wo[...]',
+      'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-world',
     technologies: ['KiCad', 'PCB Design', 'Electronics'],
     github: null,
   },
@@ -37,7 +36,7 @@ const projects = [
     summary:
       'Hands-on networking projects involving IP addressing, subnetting, network troubleshooting, and packet analysis.',
     description:
-      'These networking exercises centered on IP addressing, subnet design, troubleshooting, and analyzing packet behavior to improve understanding of real-world network configuration and communic[...]',
+      'These networking exercises centered on IP addressing, subnet design, troubleshooting, and analyzing packet behavior to improve understanding of real-world network configuration and communication',
     technologies: ['Networking', 'IPv4', 'IPv6', 'Cisco Packet Tracer'],
     github: null,
   },
