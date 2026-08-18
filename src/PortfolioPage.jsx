@@ -303,14 +303,17 @@ function PortfolioPage({ onBack }) {
             Say Hello →
           </a>
 
-          <div className="social-links">
-            <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
+          <div className="find-me-container">
+            <span className="find-me-label">Find me also at</span>
+            <div className="social-links">
+              <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
 
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+            </div>
           </div>
         </section>
 
