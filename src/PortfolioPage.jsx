@@ -123,7 +123,7 @@ function PortfolioPage({ onBack }) {
 
         <section id="projects" className="section">
           <div className="section-heading">
-            <h2>Featured Projects</h2>
+            <h2>Projects and Experience</h2>
           </div>
 
           <div className="projects-grid">
