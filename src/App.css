@@ -585,7 +585,7 @@ button {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding-right: 1000px;
+  padding-right: 950px;
   padding-top: 500px;
   background: rgba(7, 12, 19, 0.38);
   z-index: 50;
