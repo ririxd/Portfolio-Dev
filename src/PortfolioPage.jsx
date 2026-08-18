@@ -101,7 +101,7 @@ function PortfolioPage({ onBack }) {
           </div>
 
           <p className="section-text">
-            I’m a 20-year-old Computer Engineering student from National University – Manila, a huge enthusiast software engineering, embedded systems, and practical technology solutions. I love turning ideas into reality, solving problems through technology and continuously learning along the way.
+            I’m a 20-year-old Computer Engineering student from National University – Manila, a huge software engineering, embedded systems and tech enthusiast. I love turning ideas into reality, solving problems through technology and continuously learning along the way.
           </p>
         </section>
 
