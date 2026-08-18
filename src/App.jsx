@@ -34,7 +34,7 @@ function App() {
               </p>
 
               <button className="landing-button" onClick={() => changeView('portfolio')}>
-                View Portfolio
+                Jump into my ideas!
               </button>
             </div>
           </div>
