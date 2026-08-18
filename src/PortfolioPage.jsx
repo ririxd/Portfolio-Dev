@@ -32,7 +32,7 @@ const projects = [
     github: null,
   },
   {
-    title: 'Network Configuration Projects',
+    title: 'Network Configuration',
     category: 'Networking',
     summary:
       'Hands-on networking projects involving IP addressing, subnetting, network troubleshooting, and packet analysis.',
