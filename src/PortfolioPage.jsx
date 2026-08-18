@@ -22,10 +22,10 @@ const projects = [
     github: 'https://github.com/ririxd/sample-programs--py-db-sqlite3-',
   },
   {
-    title: 'Custom PCB Project',
+    title: 'Hardware and Electronics',
     category: 'Hardware',
     summary:
-      'A custom electronics board designed and routed using KiCad, including schematic design and PCB layout.',
+      'Hands-on experience in hardware and electronics, including Arduino-based projects, circuit design, sensors, microcontrollers, and embedded systems.',
     description:
       'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-world application.',
     technologies: ['KiCad', 'PCB Design', 'Electronics'],
