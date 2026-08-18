@@ -7,7 +7,7 @@ const projects = [
     summary:
       'A wireless-controlled vehicle using Arduino, NRF24L01 communication, motor drivers, and servo control.',
     description:
-      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control and sensor-based movement logic.',
+      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with Arduino Based',
     technologies: ['Arduino', 'C++', 'NRF24L01', 'L298N'],
     github: 'https://github.com/ririxd',
   },
@@ -311,8 +311,6 @@ function PortfolioPage({ onBack }) {
             <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
-
-            <a href="mailto:ricardoespinosa.dev@gmail.com">Email</a>
           </div>
         </section>
 
