@@ -30,7 +30,7 @@ function App() {
               <p className="landing-description">
                 I'm a 4th-year Computer Engineering student passionate about software
                 development, embedded systems, and building practical technology
-                solutions.
+                solutions and I love bringing my ideas to life!
               </p>
 
               <button className="landing-button" onClick={() => changeView('portfolio')}>
