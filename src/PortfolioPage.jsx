@@ -320,7 +320,7 @@ function PortfolioPage({ onBack }) {
         <footer className="built-footer">
           <div className="built-footer-inner">
             <p>
-              <span>Built by:</span> Ricardo
+              <span>Built by:</span> Mr. Ricardo David Espinosa
             </p>
             <p>
               <span>Built with:</span> React, CSS, JavaScript, Vite
