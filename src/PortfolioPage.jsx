@@ -101,7 +101,7 @@ function PortfolioPage({ onBack }) {
           </div>
 
           <p className="section-text">
-            I'm a Computer Engineering student interested in software engineering,
+            I'm a 20-year old Computer Engineering student from National University - Manila, interested in software engineering,
             embedded systems, and practical technology solutions.
           </p>
         </section>
