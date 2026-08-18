@@ -295,7 +295,7 @@ function PortfolioPage({ onBack }) {
 
           <p>
             I'm currently building my skills, projects, and experience as I work
-            toward a career in software engineering. Work and Grow with me!
+            towards a career in technology. Work and Grow with me!
           </p>
 
           <a href="mailto:ricardoespinosa.dev@gmail.com" className="primary-button">
