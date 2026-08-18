@@ -28,23 +28,17 @@ A modern, responsive portfolio website built with React and TypeScript, showcasi
 
 ### Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/ririxd/Portfolio-Dev.git
-cd Portfolio-Dev
-```
-
-2. Install dependencies:
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+2. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+3. Open your browser and navigate to `http://localhost:xxxx`
 
 ## Available Scripts
 
@@ -117,5 +111,3 @@ This project is open source and available under the MIT License.
 For issues, questions, or suggestions, please open an issue on [GitHub Issues](https://github.com/ririxd/Portfolio-Dev/issues).
 
 ---
-
-Happy coding! 🚀
