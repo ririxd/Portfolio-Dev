@@ -17,7 +17,8 @@ const projects = [
     summary:
       'A software application designed to manage hardware items, quantities, records, and inventory information.',
     description:
-      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical technologies: ['Python', 'SQLite', 'CRUD'],
+      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical usability and efficiency.',
+    technologies: ['Python', 'SQLite', 'CRUD'],
     github: 'https://github.com/ririxd/sample-programs--py-db-sqlite3-',
   },
   {
@@ -26,7 +27,7 @@ const projects = [
     summary:
       'Schematic capture and PCB layout for custom electronics circuits with practical hardware design and electrical planning.',
     description:
-      'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-world',
+      'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-world application.',
     technologies: ['KiCad', 'PCB Design', 'Electronics'],
     github: null,
   },
