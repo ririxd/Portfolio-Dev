@@ -585,14 +585,16 @@ button {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding-right: 1250px;
-  padding-top: 570px;
+  padding: 0;
   background: rgba(7, 12, 19, 0.38);
   z-index: 50;
+  overflow: visible;
 }
 
 .project-modal {
-  position: relative;
+  position: fixed;
+  right: clamp(20px, 4vw, 60px);
+  top: clamp(360px, 42vh, 460px);
   width: min(520px, 38vw);
   max-height: 72vh;
   overflow-y: auto;
@@ -602,18 +604,18 @@ button {
   padding: 2rem 1.5rem 1.5rem;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
   opacity: 0;
-  transform: translateX(24px) scale(0.96) translateY(-8px);
+  transform: translateX(24px) scale(0.96);
   animation: modalInRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes modalInRight {
   from {
     opacity: 0;
-    transform: translateX(24px) scale(0.96) translateY(-8px);
+    transform: translateX(24px) scale(0.96);
   }
   to {
     opacity: 1;
-    transform: translateX(0) scale(1) translateY(0);
+    transform: translateX(0) scale(1);
   }
 }
 
