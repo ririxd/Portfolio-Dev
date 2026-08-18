@@ -21,7 +21,7 @@ function App() {
         <div className="landing-shell">
           <div className="landing-panel">
             <div className="landing-content">
-              <p className="eyebrow">COMPUTER ENGINEERING • SOFTWARE DEVELOPMENT</p>
+              <p className="eyebrow">COMPUTER ENGINEERING | SOFTWARE DEVELOPMENT</p>
 
               <h1>
                 Hi, I'm <span>Ricardo.</span>
