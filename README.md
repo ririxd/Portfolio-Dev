@@ -1,16 +1,121 @@
-# React + Vite
+# Red.Dev.Pf
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive portfolio website built with React and TypeScript, showcasing projects, skills, and experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- ⚡ **Fast & Lightweight** - Built with Vite for optimal performance
+- 🎨 **Modern Design** - Clean, professional UI with React components
+- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile
+- 🔧 **TypeScript Support** - Type-safe development with TypeScript
+- 🎯 **Component-Based** - Modular and maintainable code structure
+- 📦 **Production Ready** - Optimized build configuration
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** - UI library
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Next-generation build tool
+- **ESLint** - Code quality and linting
+- **React Icons** - Beautiful icon library
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/ririxd/Portfolio-Dev.git
+cd Portfolio-Dev
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview the production build
+- `npm run lint` - Run ESLint to check code quality
+
+## Project Structure
+
+```
+src/
+├── components/
+│   └── PortfolioPage.jsx    # Main portfolio component
+├── App.jsx                   # Root component
+├── App.tsx                   # TypeScript version
+├── main.jsx                  # Entry point
+└── styles/
+    ├── App.css              # Component styles
+    └── index.css            # Global styles
+```
+
+## Features & Pages
+
+- **Portfolio Page** - Showcase of projects and work
+- **Responsive Design** - Optimized for all screen sizes
+- **Component Architecture** - Reusable, maintainable components
+
+## Development
+
+The project uses Vite for fast HMR (Hot Module Replacement) during development. Any changes you make to your components will instantly reflect in the browser.
+
+## Building for Production
+
+To create an optimized production build:
+
+```bash
+npm run build
+```
+
+This generates a `dist` folder with optimized files ready for deployment.
+
+## Deployment
+
+The built files can be deployed to any static hosting service:
+- Vercel
+- Netlify
+- GitHub Pages
+- AWS S3
+- Any other static hosting provider
+
+## Code Quality
+
+The project includes ESLint configuration to maintain code quality:
+
+```bash
+npm run lint
+```
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Author
+
+**ririxd** - [GitHub Profile](https://github.com/ririxd)
+
+## Support
+
+For issues, questions, or suggestions, please open an issue on [GitHub Issues](https://github.com/ririxd/Portfolio-Dev/issues).
+
+---
+
+Happy coding! 🚀
