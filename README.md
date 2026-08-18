@@ -1,6 +1,6 @@
 # Red.Dev.Pf
 
-A modern, responsive portfolio website built with React and TypeScript, showcasing projects, skills, and experience.
+A modern, responsive portfolio website built with React and TypeScript, showcasing my projects, skills, and experience.
 
 ## Features
 
