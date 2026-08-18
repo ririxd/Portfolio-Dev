@@ -582,45 +582,38 @@ button {
 .project-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(7, 12, 19, 0.76);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-right: 1250px;
+  padding-top: 570px;
+  background: rgba(7, 12, 19, 0.38);
   z-index: 50;
-  opacity: 0;
-  animation: fadeInOverlay 0.28s ease forwards;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
 }
 
 .project-modal {
   position: relative;
-  width: min(680px, 92vw);
+  width: min(520px, 38vw);
+  max-height: 72vh;
+  overflow-y: auto;
   background: rgba(15, 23, 38, 0.98);
   border: 1px solid rgba(126, 231, 197, 0.35);
   border-radius: 22px;
   padding: 2rem 1.5rem 1.5rem;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
   opacity: 0;
-  transform: translateY(22px) scale(0.96);
-  animation: modalIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity, transform;
+  transform: translateX(24px) scale(0.96) translateY(-8px);
+  animation: modalInRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes modalIn {
+@keyframes modalInRight {
   from {
     opacity: 0;
-    transform: translateY(22px) scale(0.96);
+    transform: translateX(24px) scale(0.96) translateY(-8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0) scale(1) translateY(0);
   }
 }
 
