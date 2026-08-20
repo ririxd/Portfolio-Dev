@@ -612,9 +612,9 @@ button {
   inset: 0 !important;
   z-index: 1000 !important;
   display: flex !important;
-  align-items: flex-end !important;
+  align-items: center !important;
   justify-content: center !important;
-  padding: 1.5rem 1.5rem 3.5rem;
+  padding: 1.5rem;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -622,11 +622,12 @@ button {
 
 .linkedin-modal {
   position: relative;
-  width: min(420px, 100%);
+  width: min(560px, 100%);
   max-width: calc(100vw - 3rem);
-  padding: 2.5rem 1.5rem 1.5rem;
-  border: 1px solid rgba(126, 231, 197, 0.35);
-  border-radius: 20px;
+  min-height: 360px;
+  padding: 3.5rem 2.5rem 2.5rem;
+  border: 2px solid rgba(126, 231, 197, 0.55);
+  border-radius: 24px;
   background: #111827;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
 }
@@ -634,6 +635,8 @@ button {
 .linkedin-modal .LI-profile-badge {
   display: flex;
   justify-content: center;
+  transform: scale(1.12);
+  transform-origin: top center;
 }
 
 .linkedin-modal h3 {
