@@ -637,7 +637,8 @@ button {
 .linkedin-profile-card {
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
+  min-width: 300px;
 }
 
 .linkedin-profile-card .LI-profile-badge > .badge-base__link {
