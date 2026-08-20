@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const projects = [
   {
@@ -86,17 +86,21 @@ function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
   const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
+  const linkedInBadgeRef = useRef(null)
 
   useEffect(() => {
     if (!isLinkedInModalOpen) return undefined
 
-    const script = document.createElement('script')
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
+    const frame = requestAnimationFrame(() => {
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = 'https://platform.linkedin.com/badges/js/profile.js'
+      script.async = true
+      script.defer = true
+      linkedInBadgeRef.current?.appendChild(script)
+    })
 
-    return () => script.remove()
+    return () => cancelAnimationFrame(frame)
   }, [isLinkedInModalOpen])
 
   return (
@@ -406,7 +410,7 @@ function PortfolioPage({ onBack }) {
             </button>
 
             <h3 id="linkedin-modal-title">Connect on LinkedIn</h3>
-            <div className="linkedin-profile-card">
+            <div ref={linkedInBadgeRef} className="linkedin-profile-card">
               <div
                 className="badge-base LI-profile-badge"
                 data-locale="en_US"
