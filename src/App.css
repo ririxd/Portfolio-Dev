@@ -636,6 +636,7 @@ button {
   display: grid;
   gap: 1rem;
   justify-items: center;
+  overflow: hidden;
   padding: 2rem;
   border: 1px solid rgba(117, 210, 255, 0.28);
   border-radius: 16px;
@@ -643,35 +644,12 @@ button {
   text-align: center;
 }
 
-.linkedin-profile-label {
-  color: #8ed7ff;
-  font-size: 1.25rem;
-  font-weight: 800;
+.linkedin-profile-card .LI-profile-badge > .badge-base__link {
+  display: none;
 }
 
-.linkedin-profile-card p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.linkedin-profile-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0.7rem 1.2rem;
-  border: 1px solid rgba(126, 231, 197, 0.5);
-  border-radius: 999px;
-  color: var(--primary);
-  font-weight: 800;
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.linkedin-profile-link:hover,
-.linkedin-profile-link:focus-visible {
-  background: rgba(126, 231, 197, 0.1);
-  box-shadow: 0 0 18px rgba(126, 231, 197, 0.3);
-  transform: translateY(-1px);
+.linkedin-profile-card .LI-profile-badge {
+  max-width: 100%;
 }
 
 .linkedin-modal h3 {
