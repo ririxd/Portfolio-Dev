@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const projects = [
   {
@@ -7,7 +7,7 @@ const projects = [
     summary:
       'A wireless-controlled vehicle using Arduino, NRF24L01 communication, motor drivers, and servo control.',
     description:
-      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with Arduino Based',
+      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with hardware integration and control design.',
     technologies: ['Arduino', 'C++', 'NRF24L01', 'L298N'],
     github: 'https://github.com/ririxd',
   },
@@ -17,27 +17,27 @@ const projects = [
     summary:
       'A software application designed to manage hardware items, quantities, records, and inventory information.',
     description:
-      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical usability and efficiency.',
+      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical usability and efficient record handling.',
     technologies: ['Python', 'SQLite', 'CRUD'],
     github: 'https://github.com/ririxd/sample-programs--py-db-sqlite3-',
   },
   {
-   title: 'Hardware Integration and Troubleshooting',
+    title: 'Custom PCB Project',
     category: 'Hardware',
     summary:
-      'Schematic capture and PCB layout for custom electronics circuits with practical hardware design and electrical planning.',
+      'A custom electronics board designed and routed using KiCad, including schematic design and PCB layout.',
     description:
       'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-world application.',
     technologies: ['KiCad', 'PCB Design', 'Electronics'],
     github: null,
   },
   {
-    title: 'Network Configuration',
+    title: 'Network Configuration Projects',
     category: 'Networking',
     summary:
       'Hands-on networking projects involving IP addressing, subnetting, network troubleshooting, and packet analysis.',
     description:
-      'These networking exercises centered on IP addressing, subnet design, troubleshooting, and analyzing packet behavior to improve understanding of real-world network configuration and communication',
+      'These networking exercises centered on IP addressing, subnet design, troubleshooting, and analyzing packet behavior to improve understanding of real-world network configuration and communication.',
     technologies: ['Networking', 'IPv4', 'IPv6', 'Cisco Packet Tracer'],
     github: null,
   },
@@ -85,28 +85,6 @@ const learningItems = [
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
-  const [isLinkedInOpen, setIsLinkedInOpen] = useState(false)
-
-  useEffect(() => {
-    if (!isLinkedInOpen) return undefined
-
-    const script = document.createElement('script')
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') setIsLinkedInOpen(false)
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      script.remove()
-    }
-  }, [isLinkedInOpen])
 
   return (
     <div className="portfolio-page">
@@ -145,7 +123,7 @@ function PortfolioPage({ onBack }) {
 
         <section id="projects" className="section">
           <div className="section-heading">
-            <h2>Projects and Experience</h2>
+            <h2>Featured Projects</h2>
           </div>
 
           <div className="projects-grid">
@@ -325,21 +303,16 @@ function PortfolioPage({ onBack }) {
             Say Hello →
           </a>
 
-          <div className="find-me-container">
-            <span className="find-me-label">Find me also at</span>
-            <div className="social-links">
-              <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
-                GitHub
-              </a>
+          <div className="social-links">
+            <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
 
-              <button
-                type="button"
-                className="social-link-button"
-                onClick={() => setIsLinkedInOpen(true)}
-              >
-                LinkedIn
-              </button>
-            </div>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+
+            <a href="mailto:ricardoespinosa.dev@gmail.com">Email</a>
           </div>
         </section>
 
@@ -371,6 +344,9 @@ function PortfolioPage({ onBack }) {
 
             <ul className="modal-list">
               <li>
+                <span className="modal-summary">{selectedProject.summary}</span>
+              </li>
+              <li>
                 <span className="modal-description">{selectedProject.description}</span>
               </li>
             </ul>
@@ -388,54 +364,6 @@ function PortfolioPage({ onBack }) {
                 </a>
               </div>
             )}
-          </div>
-        </div>
-      )}
-
-      {isLinkedInOpen && (
-        <div
-          className="linkedin-modal-overlay"
-          onClick={() => setIsLinkedInOpen(false)}
-        >
-          <div
-            className="linkedin-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="linkedin-modal-title"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="modal-close-button"
-              aria-label="Close LinkedIn profile"
-              onClick={() => setIsLinkedInOpen(false)}
-            >
-              ×
-            </button>
-
-            <div className="modal-header">
-              <span className="modal-category">LinkedIn</span>
-              <h3 id="linkedin-modal-title">Connect with Ricardo</h3>
-            </div>
-
-            <div
-              className="badge-base LI-profile-badge"
-              data-locale="en_US"
-              data-size="large"
-              data-theme="dark"
-              data-type="HORIZONTAL"
-              data-vanity="ricardo-david-espinosa-b8451142b"
-              data-version="v1"
-            >
-              <a
-                className="badge-base__link LI-simple-link"
-                href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ricardo David Espinosa
-              </a>
-            </div>
           </div>
         </div>
       )}
