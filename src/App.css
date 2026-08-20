@@ -579,6 +579,19 @@ button {
   margin-top: 1.5rem;
 }
 
+.social-links a {
+  color: var(--text);
+  font-weight: 700;
+  transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(126, 231, 197, 0.75), 0 0 20px rgba(117, 210, 255, 0.4);
+  transform: translateY(-1px);
+}
+
 .project-modal-overlay {
   position: fixed;
   inset: 0;
