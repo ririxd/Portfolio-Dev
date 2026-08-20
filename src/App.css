@@ -644,6 +644,15 @@ button {
   max-width: 100%;
 }
 
+.linkedin-profile-card .LI-profile-badge > .badge-base__link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .linkedin-modal h3 {
   margin: 0 0 1.25rem;
   text-align: center;
