@@ -312,7 +312,6 @@ function PortfolioPage({ onBack }) {
               LinkedIn
             </a>
 
-            <a href="mailto:ricardoespinosa.dev@gmail.com">Email</a>
           </div>
         </section>
 
