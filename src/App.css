@@ -590,7 +590,6 @@ button {
   border: 0;
   padding: 0;
   background: transparent;
-  outline: none;
   color: var(--text);
   font: inherit;
   font-weight: 700;
@@ -608,13 +607,13 @@ button {
 }
 
 .linkedin-modal-overlay {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 1000 !important;
-  display: flex !important;
-  align-items: flex-end !important;
-  justify-content: center !important;
-  padding: 1.5rem 1.5rem 5.5rem;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -622,26 +621,23 @@ button {
 
 .linkedin-modal {
   position: relative;
-  width: min(560px, 100%);
-  max-width: calc(100vw - 3rem);
-  min-height: 0;
-  padding: 3.5rem 2.5rem 2.5rem;
-  border: 2px solid rgba(126, 231, 197, 0.55);
-  border-radius: 24px;
+  width: min(420px, 100%);
+  padding: 2.75rem 1.5rem 1.5rem;
+  border: 1px solid rgba(126, 231, 197, 0.55);
+  border-radius: 20px;
   background: #111827;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+}
+
+.linkedin-modal h3 {
+  margin: 0 0 1.25rem;
+  text-align: center;
 }
 
 .linkedin-profile-card {
   display: flex;
   justify-content: center;
-  overflow: visible;
-  padding: 0;
-  text-align: left;
-}
-
-.linkedin-profile-card .LI-profile-badge {
-  max-width: 100%;
+  overflow: hidden;
 }
 
 .linkedin-profile-card .LI-profile-badge > .badge-base__link {
@@ -653,15 +649,10 @@ button {
   white-space: nowrap;
 }
 
-.linkedin-modal h3 {
-  margin: 0 0 1.25rem;
-  text-align: center;
-}
-
 .linkedin-modal-close {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.65rem;
+  right: 0.65rem;
   display: grid;
   width: 2rem;
   height: 2rem;
@@ -673,12 +664,6 @@ button {
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
-}
-
-.linkedin-modal-close:hover,
-.linkedin-modal-close:focus-visible {
-  background: rgba(126, 231, 197, 0.16);
-  color: var(--primary);
 }
 
 .project-modal-overlay {
