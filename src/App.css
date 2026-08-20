@@ -633,30 +633,11 @@ button {
 }
 
 .linkedin-profile-card {
-  display: grid;
-  gap: 1rem;
-  justify-items: center;
-  overflow: hidden;
-  padding: 2rem;
-  border: 1px solid rgba(117, 210, 255, 0.28);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  text-align: center;
-}
-
-.linkedin-profile-card .LI-profile-badge > .badge-base__link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid rgba(126, 231, 197, 0.5);
-  border-radius: 999px;
-  color: var(--primary);
-  font-weight: 800;
-}
-
-.linkedin-profile-card .LI-profile-badge:has(iframe) > .badge-base__link {
-  display: none;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  padding: 0;
+  text-align: left;
 }
 
 .linkedin-profile-card .LI-profile-badge {
