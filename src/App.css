@@ -590,6 +590,7 @@ button {
   border: 0;
   padding: 0;
   background: transparent;
+  outline: none;
   color: var(--text);
   font: inherit;
   font-weight: 700;
@@ -607,12 +608,12 @@ button {
 }
 
 .linkedin-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   padding: 1.5rem;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
@@ -622,11 +623,17 @@ button {
 .linkedin-modal {
   position: relative;
   width: min(420px, 100%);
+  max-width: calc(100vw - 3rem);
   padding: 2.5rem 1.5rem 1.5rem;
   border: 1px solid rgba(126, 231, 197, 0.35);
   border-radius: 20px;
   background: #111827;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+}
+
+.linkedin-modal .LI-profile-badge {
+  display: flex;
+  justify-content: center;
 }
 
 .linkedin-modal h3 {
