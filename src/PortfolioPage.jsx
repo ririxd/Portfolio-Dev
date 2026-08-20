@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const projects = [
   {
@@ -7,7 +7,7 @@ const projects = [
     summary:
       'A wireless-controlled vehicle using Arduino, NRF24L01 communication, motor drivers, and servo control.',
     description:
-      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control and sensor-based movement logic.',
+      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with Arduino Based',
     technologies: ['Arduino', 'C++', 'NRF24L01', 'L298N'],
     github: 'https://github.com/ririxd',
   },
@@ -85,6 +85,28 @@ const learningItems = [
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
+  const [isLinkedInOpen, setIsLinkedInOpen] = useState(false)
+
+  useEffect(() => {
+    if (!isLinkedInOpen) return undefined
+
+    const script = document.createElement('script')
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
+    script.async = true
+    script.defer = true
+    document.body.appendChild(script)
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsLinkedInOpen(false)
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      script.remove()
+    }
+  }, [isLinkedInOpen])
 
   return (
     <div className="portfolio-page">
@@ -101,7 +123,8 @@ function PortfolioPage({ onBack }) {
           </div>
 
           <p className="section-text">
-            I’m a 21-year-old Computer Engineering student from National University – Manila, a huge software engineering, embedded systems and tech enthusiast. I love turning ideas into reality, solving problems through technology and continuously learning along the way.
+            I'm a Computer Engineering student interested in software engineering,
+            embedded systems, and practical technology solutions.
           </p>
         </section>
 
@@ -295,7 +318,7 @@ function PortfolioPage({ onBack }) {
 
           <p>
             I'm currently building my skills, projects, and experience as I work
-            towards a career in technology. Work and Grow with me!
+            toward a career in software engineering. Work and Grow with me!
           </p>
 
           <a href="mailto:ricardoespinosa.dev@gmail.com" className="primary-button">
@@ -309,9 +332,13 @@ function PortfolioPage({ onBack }) {
                 GitHub
               </a>
 
-              <a href="www.linkedin.com/in/ricardo-david-espinosa-b8451142b" target="_blank" rel="noreferrer">
+              <button
+                type="button"
+                className="social-link-button"
+                onClick={() => setIsLinkedInOpen(true)}
+              >
                 LinkedIn
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -319,7 +346,7 @@ function PortfolioPage({ onBack }) {
         <footer className="built-footer">
           <div className="built-footer-inner">
             <p>
-              <span>Built by:</span> Ricardo David Espinosa
+              <span>Built by:</span> Ricardo
             </p>
             <p>
               <span>Built with:</span> React, CSS, JavaScript, Vite
@@ -361,6 +388,54 @@ function PortfolioPage({ onBack }) {
                 </a>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {isLinkedInOpen && (
+        <div
+          className="linkedin-modal-overlay"
+          onClick={() => setIsLinkedInOpen(false)}
+        >
+          <div
+            className="linkedin-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="linkedin-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="modal-close-button"
+              aria-label="Close LinkedIn profile"
+              onClick={() => setIsLinkedInOpen(false)}
+            >
+              ×
+            </button>
+
+            <div className="modal-header">
+              <span className="modal-category">LinkedIn</span>
+              <h3 id="linkedin-modal-title">Connect with Ricardo</h3>
+            </div>
+
+            <div
+              className="badge-base LI-profile-badge"
+              data-locale="en_US"
+              data-size="large"
+              data-theme="dark"
+              data-type="HORIZONTAL"
+              data-vanity="ricardo-david-espinosa-b8451142b"
+              data-version="v1"
+            >
+              <a
+                className="badge-base__link LI-simple-link"
+                href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ricardo David Espinosa
+              </a>
+            </div>
           </div>
         </div>
       )}
