@@ -612,9 +612,9 @@ button {
   inset: 0 !important;
   z-index: 1000 !important;
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-end !important;
   justify-content: center !important;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 5.5rem;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -624,7 +624,7 @@ button {
   position: relative;
   width: min(560px, 100%);
   max-width: calc(100vw - 3rem);
-  min-height: 360px;
+  min-height: 0;
   padding: 3.5rem 2.5rem 2.5rem;
   border: 2px solid rgba(126, 231, 197, 0.55);
   border-radius: 24px;
@@ -632,11 +632,46 @@ button {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
 }
 
-.linkedin-modal .LI-profile-badge {
-  display: flex;
-  justify-content: center;
-  transform: scale(1.12);
-  transform-origin: top center;
+.linkedin-profile-card {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  padding: 2rem;
+  border: 1px solid rgba(117, 210, 255, 0.28);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+}
+
+.linkedin-profile-label {
+  color: #8ed7ff;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.linkedin-profile-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.linkedin-profile-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid rgba(126, 231, 197, 0.5);
+  border-radius: 999px;
+  color: var(--primary);
+  font-weight: 800;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.linkedin-profile-link:hover,
+.linkedin-profile-link:focus-visible {
+  background: rgba(126, 231, 197, 0.1);
+  box-shadow: 0 0 18px rgba(126, 231, 197, 0.3);
+  transform: translateY(-1px);
 }
 
 .linkedin-modal h3 {
