@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const projects = [
   {
@@ -86,18 +86,6 @@ function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
   const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
-
-  useEffect(() => {
-    if (!isLinkedInModalOpen) return undefined
-
-    const script = document.createElement('script')
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
-
-    return () => script.remove()
-  }, [isLinkedInModalOpen])
 
   return (
     <div className="portfolio-page">
@@ -406,22 +394,16 @@ function PortfolioPage({ onBack }) {
             </button>
 
             <h3 id="linkedin-modal-title">Connect on LinkedIn</h3>
-            <div
-              className="badge-base LI-profile-badge"
-              data-locale="en_US"
-              data-size="large"
-              data-theme="dark"
-              data-type="HORIZONTAL"
-              data-vanity="ricardo-david-espinosa-b8451142b"
-              data-version="v1"
-            >
+            <div className="linkedin-profile-card">
+              <span className="linkedin-profile-label">LinkedIn</span>
+              <p>Let's connect and talk about opportunities.</p>
               <a
-                className="badge-base__link LI-simple-link"
+                className="linkedin-profile-link"
                 href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
                 target="_blank"
                 rel="noreferrer"
               >
-                Ricardo David Espinosa
+                View profile →
               </a>
             </div>
           </div>
