@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const projects = [
   {
@@ -86,7 +86,6 @@ function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
   const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
-  const linkedInBadgeRef = useRef(null)
 
   useEffect(() => {
     if (!isLinkedInModalOpen) return undefined
@@ -414,13 +413,13 @@ function PortfolioPage({ onBack }) {
             </button>
 
             <h3 id="linkedin-modal-title">Connect on LinkedIn</h3>
-            <div ref={linkedInBadgeRef} className="linkedin-profile-card">
+            <div className="linkedin-profile-card">
               <div
                 className="badge-base LI-profile-badge"
                 data-locale="en_US"
-                data-size="large"
+                data-size="medium"
                 data-theme="dark"
-                data-type="VERTICAL"
+                data-type="HORIZONTAL"
                 data-vanity="ricardo-david-espinosa-b8451142b"
                 data-version="v1"
               >
@@ -437,6 +436,7 @@ function PortfolioPage({ onBack }) {
           </div>
         </div>
       )}
+
     </div>
   )
 }
