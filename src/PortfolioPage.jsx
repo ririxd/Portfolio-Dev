@@ -91,16 +91,20 @@ function PortfolioPage({ onBack }) {
   useEffect(() => {
     if (!isLinkedInModalOpen) return undefined
 
+    let script
     const frame = requestAnimationFrame(() => {
-      const script = document.createElement('script')
+      script = document.createElement('script')
       script.type = 'text/javascript'
       script.src = 'https://platform.linkedin.com/badges/js/profile.js'
       script.async = true
       script.defer = true
-      linkedInBadgeRef.current?.appendChild(script)
+      document.body.appendChild(script)
     })
 
-    return () => cancelAnimationFrame(frame)
+    return () => {
+      cancelAnimationFrame(frame)
+      script?.remove()
+    }
   }, [isLinkedInModalOpen])
 
   return (
