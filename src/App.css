@@ -621,33 +621,35 @@ button {
 
 .linkedin-modal {
   position: relative;
-  width: min(420px, 100%);
-  padding: 2.75rem 1.5rem 1.5rem;
+  width: min(520px, 94vw);
+  padding: 3.25rem 1.5rem 1.75rem;
   border: 1px solid rgba(126, 231, 197, 0.55);
   border-radius: 20px;
   background: #111827;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
 }
 
-.linkedin-modal h3 {
-  margin: 0 0 1.25rem;
-  text-align: center;
-}
-
 .linkedin-profile-card {
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
+  text-align: center;
   overflow: visible;
-  min-width: 300px;
+  min-width: 0;
 }
 
-.linkedin-profile-card .LI-profile-badge > .badge-base__link {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+.linkedin-profile-card .LI-profile-badge {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: auto !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.linkedin-profile-card .badge-base__link {
+  display: none !important;
 }
 
 .linkedin-modal-close {
