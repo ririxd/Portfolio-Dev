@@ -412,7 +412,6 @@ function PortfolioPage({ onBack }) {
               ×
             </button>
 
-            <h3 id="linkedin-modal-title">Connect on LinkedIn</h3>
             <div className="linkedin-profile-card">
               <div
                 className="badge-base LI-profile-badge"
