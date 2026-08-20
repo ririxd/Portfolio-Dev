@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const projects = [
   {
@@ -85,6 +85,19 @@ const learningItems = [
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
+  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (!isLinkedInModalOpen) return undefined
+
+    const script = document.createElement('script')
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
+    script.async = true
+    script.defer = true
+    document.body.appendChild(script)
+
+    return () => script.remove()
+  }, [isLinkedInModalOpen])
 
   return (
     <div className="portfolio-page">
@@ -308,9 +321,13 @@ function PortfolioPage({ onBack }) {
               GitHub
             </a>
 
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+            <button
+              type="button"
+              className="linkedin-button"
+              onClick={() => setIsLinkedInModalOpen(true)}
+            >
               LinkedIn
-            </a>
+            </button>
 
           </div>
         </section>
@@ -363,6 +380,50 @@ function PortfolioPage({ onBack }) {
                 </a>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {isLinkedInModalOpen && (
+        <div
+          className="linkedin-modal-overlay"
+          onClick={() => setIsLinkedInModalOpen(false)}
+        >
+          <div
+            className="linkedin-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="linkedin-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="linkedin-modal-close"
+              aria-label="Close LinkedIn profile"
+              onClick={() => setIsLinkedInModalOpen(false)}
+            >
+              ×
+            </button>
+
+            <h3 id="linkedin-modal-title">Connect on LinkedIn</h3>
+            <div
+              className="badge-base LI-profile-badge"
+              data-locale="en_US"
+              data-size="large"
+              data-theme="dark"
+              data-type="HORIZONTAL"
+              data-vanity="ricardo-david-espinosa-b8451142b"
+              data-version="v1"
+            >
+              <a
+                className="badge-base__link LI-simple-link"
+                href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ricardo David Espinosa
+              </a>
+            </div>
           </div>
         </div>
       )}
