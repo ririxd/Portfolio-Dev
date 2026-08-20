@@ -611,9 +611,10 @@ button {
   inset: 0;
   z-index: 1000;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 0;
+  padding-top: 67vh;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -622,8 +623,8 @@ button {
 .linkedin-modal {
   position: relative;
   width: min(645px, 94vw);
-  min-height: 690px;
-  padding: 6.2rem 2.25rem 4rem;
+  min-height: 520px;
+  padding: 3.6rem 2.25rem 3rem;
   border: 1px solid rgba(126, 231, 197, 0.55);
   border-radius: 24px;
   background: #111827;
@@ -635,7 +636,7 @@ button {
 
 .linkedin-modal-title {
   width: 100%;
-  margin: 0 0 5.2rem;
+  margin: 0 0 3.2rem;
   text-align: center;
   font-size: clamp(1.7rem, 3vw, 2rem);
   line-height: 1.2;
