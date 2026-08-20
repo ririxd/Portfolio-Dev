@@ -582,45 +582,38 @@ button {
 .project-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(7, 12, 19, 0.76);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-right: 750px;
+  padding-top: 500px;
+  background: rgba(7, 12, 19, 0.38);
   z-index: 50;
-  opacity: 0;
-  animation: fadeInOverlay 0.28s ease forwards;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
 }
 
 .project-modal {
   position: relative;
-  width: min(680px, 92vw);
+  width: min(520px, 38vw);
+  max-height: 72vh;
+  overflow-y: auto;
   background: rgba(15, 23, 38, 0.98);
   border: 1px solid rgba(126, 231, 197, 0.35);
   border-radius: 22px;
   padding: 2rem 1.5rem 1.5rem;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
   opacity: 0;
-  transform: translateY(22px) scale(0.96);
-  animation: modalIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity, transform;
+  transform: translateX(24px) scale(0.96) translateY(-8px);
+  animation: modalInRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes modalIn {
+@keyframes modalInRight {
   from {
     opacity: 0;
-    transform: translateY(22px) scale(0.96);
+    transform: translateX(24px) scale(0.96) translateY(-8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0) scale(1) translateY(0);
   }
 }
 
@@ -777,4 +770,109 @@ button {
 .built-footer-inner span {
   color: var(--text);
   font-weight: 700;
+}
+
+.find-me-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.find-me-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.social-link-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-link-button:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.linkedin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(7, 12, 19, 0.7);
+}
+
+.linkedin-modal {
+  position: relative;
+  width: min(560px, 100%);
+  min-height: 240px;
+  padding: 2rem 1.5rem 1.5rem;
+  background: rgba(15, 23, 38, 0.98);
+  border: 1px solid rgba(126, 231, 197, 0.35);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  animation: modalInRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close-button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.linkedin-modal .LI-profile-badge {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
