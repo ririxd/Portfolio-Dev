@@ -410,7 +410,7 @@ function PortfolioPage({ onBack }) {
               <div
                 className="badge-base LI-profile-badge"
                 data-locale="en_US"
-                data-size="large"
+                data-size="medium"
                 data-theme="dark"
                 data-type="HORIZONTAL"
                 data-vanity="ricardo-david-espinosa-b8451142b"
