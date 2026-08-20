@@ -645,6 +645,17 @@ button {
 }
 
 .linkedin-profile-card .LI-profile-badge > .badge-base__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(126, 231, 197, 0.5);
+  border-radius: 999px;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.linkedin-profile-card .LI-profile-badge:has(iframe) > .badge-base__link {
   display: none;
 }
 
