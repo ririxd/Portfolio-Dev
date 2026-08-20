@@ -309,7 +309,7 @@ function PortfolioPage({ onBack }) {
                 GitHub
               </a>
 
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+              <a href="www.linkedin.com/in/ricardo-david-espinosa-b8451142b" target="_blank" rel="noreferrer">
                 LinkedIn
               </a>
             </div>
