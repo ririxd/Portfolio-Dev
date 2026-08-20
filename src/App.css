@@ -614,7 +614,7 @@ button {
   align-items: flex-start;
   justify-content: center;
   padding: 0;
-  padding-top: 144vh;
+  padding-top: 244vh;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
