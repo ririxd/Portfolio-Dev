@@ -612,9 +612,9 @@ button {
   inset: 0 !important;
   z-index: 1000 !important;
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-end !important;
   justify-content: center !important;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 3.5rem;
   background: rgba(7, 12, 19, 0.78);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
