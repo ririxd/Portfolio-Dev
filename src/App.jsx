@@ -21,7 +21,7 @@ function App() {
         <div className="landing-shell">
           <div className="landing-panel">
             <div className="landing-content">
-              <p className="eyebrow">COMPUTER ENGINEERING • SOFTWARE DEVELOPMENT</p>
+              <p className="eyebrow">COMPUTER ENGINEERING | SOFTWARE DEVELOPMENT</p>
 
               <h1>
                 Hi, I'm <span>Ricardo.</span>
@@ -30,11 +30,11 @@ function App() {
               <p className="landing-description">
                 I'm a 4th-year Computer Engineering student passionate about software
                 development, embedded systems, and building practical technology
-                solutions.
+                solutions and I love bringing my ideas to life!
               </p>
 
               <button className="landing-button" onClick={() => changeView('portfolio')}>
-                View Portfolio
+                Jump into my ideas!
               </button>
             </div>
           </div>
