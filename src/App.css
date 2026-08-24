@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -892,4 +893,125 @@ button {
 .built-footer-inner span {
   color: var(--text);
   font-weight: 700;
+}
+
+/* Prevent horizontal scroll on small screens */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .portfolio-content,
+  .portfolio-topbar,
+  .contact-section,
+  .built-footer-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .projects-grid,
+  .awards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-modal-overlay {
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .project-modal {
+    width: min(680px, 94vw);
+    max-height: 85vh;
+    margin: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .landing-panel {
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .landing-content h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .section-heading h2,
+  .contact-section h2 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .skills-grid {
+    gap: 0.55rem;
+  }
+
+  .skill-card {
+    min-height: 44px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .project-card {
+    padding: 1rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.35rem;
+  }
+
+  .project-links {
+    gap: 0.6rem;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timeline-dot {
+    left: -1.45rem;
+    width: 10px;
+    height: 10px;
+  }
+
+  .social-links {
+    gap: 0.9rem;
+  }
+
+  .built-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 560px) {
+  .landing-button,
+  .return-button,
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+
+  .project-links {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .project-modal {
+    width: 94vw;
+    padding: 1.1rem;
+    border-radius: 16px;
+  }
+
+  .technology-list span,
+  .project-category,
+  .modal-category {
+    font-size: 0.72rem;
+  }
 }
