@@ -85,118 +85,50 @@ const learningItems = [
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [projectModalStyle, setProjectModalStyle] = useState({})
-  const [linkedInModalStyle, setLinkedInModalStyle] = useState({})
-  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
-  const [expandedIndex, setExpandedIndex] = useState(null)
-  const projectAnchorRef = useRef(null)
-  const linkedinAnchorRef = useRef(null)
-  const projectsSectionRef = useRef(null)
+  const projectsGridRef = useRef(null)
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
-  const computeProjectModalPosition = (anchorRect) => {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
+  const placeProjectModalInGridCenter = () => {
+    const grid = projectsGridRef.current
+    if (!grid) return
+
+    const rect = grid.getBoundingClientRect()
     const vw = window.innerWidth
     const vh = window.innerHeight
-    const gap = 14
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
 
-    const width = isMobile ? Math.min(vw - 16, 620) : Math.min(520, Math.round(vw * 0.38))
-    let left
-    let top = clamp(anchorRect.top + 6, 10, vh - 460)
+    const width = isMobile ? Math.min(vw - 16, 620) : Math.min(560, Math.round(vw * 0.36))
+    const estimatedHeight = isMobile ? 520 : 460
 
-    if (isMobile) {
-      left = Math.round((vw - width) / 2)
-      top = clamp(anchorRect.top + 8, 10, vh - 520)
-    } else {
-      const fitsRight = anchorRect.right + gap + width <= vw - 12
-      left = fitsRight ? anchorRect.right + gap : anchorRect.left - width - gap
-      left = clamp(left, 10, vw - width - 10)
-    }
-
-    // shift modal slightly left
-    left = left - (isMobile ? 10 : 24)
+    // Center of the rectangle you drew (middle of the 2x2 featured-project cards)
+    const left = clamp(rect.left + rect.width / 2 - width / 2, 8, vw - width - 8)
+    const top = clamp(rect.top + rect.height / 2 - estimatedHeight / 2, 72, vh - estimatedHeight - 12)
 
     setProjectModalStyle({
       position: 'fixed',
-      top: `${Math.round(top)}px`,
       left: `${Math.round(left)}px`,
+      top: `${Math.round(top)}px`,
       width: `${Math.round(width)}px`,
       maxHeight: isMobile ? '78vh' : '72vh',
     })
   }
 
-  const computeLinkedInModalPosition = (anchorRect) => {
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    const width = Math.min(430, vw - 16)
-    const left = clamp(anchorRect.left + anchorRect.width / 2 - width / 2, 8, vw - width - 8)
-    const top = clamp(anchorRect.bottom + 10, 10, vh - 420)
-
-    setLinkedInModalStyle({
-      position: 'fixed',
-      top: `${Math.round(top)}px`,
-      left: `${Math.round(left)}px`,
-      width: `${Math.round(width)}px`,
-      maxHeight: '80vh',
-    })
-  }
-
-  const openProjectModal = (project, event) => {
-    const card = event.currentTarget.closest('.project-card')
-    if (card) {
-      projectAnchorRef.current = card
-      computeProjectModalPosition(card.getBoundingClientRect())
-    }
+  const openProjectModal = (project) => {
+    placeProjectModalInGridCenter()
     setSelectedProject(project)
   }
 
-  const openLinkedInModal = (event) => {
-    linkedinAnchorRef.current = event.currentTarget
-    computeLinkedInModalPosition(event.currentTarget.getBoundingClientRect())
-    setIsLinkedInModalOpen(true)
-  }
-
   useEffect(() => {
-    const onViewportChange = () => {
-      if (selectedProject && projectAnchorRef.current) {
-        computeProjectModalPosition(projectAnchorRef.current.getBoundingClientRect())
-      }
-      if (isLinkedInModalOpen && linkedinAnchorRef.current) {
-        computeLinkedInModalPosition(linkedinAnchorRef.current.getBoundingClientRect())
-      }
-    }
-
-    window.addEventListener('resize', onViewportChange)
-    window.addEventListener('scroll', onViewportChange, { passive: true })
+    if (!selectedProject) return
+    const sync = () => placeProjectModalInGridCenter()
+    window.addEventListener('resize', sync)
+    window.addEventListener('scroll', sync, { passive: true })
     return () => {
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange)
+      window.removeEventListener('resize', sync)
+      window.removeEventListener('scroll', sync)
     }
-  }, [selectedProject, isLinkedInModalOpen])
-
-  useEffect(() => {
-    if (!isLinkedInModalOpen) return
-
-    const runParse = () => {
-      if (window.IN && typeof window.IN.parse === 'function') {
-        window.IN.parse()
-      }
-    }
-
-    const existing = document.getElementById('linkedin-badge-script')
-    if (existing) {
-      runParse()
-      return
-    }
-
-    const script = document.createElement('script')
-    script.id = 'linkedin-badge-script'
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-    script.async = true
-    script.defer = true
-    script.onload = runParse
-    document.body.appendChild(script)
-  }, [isLinkedInModalOpen])
+  }, [selectedProject])
 
   return (
     <>
@@ -239,7 +171,7 @@ function PortfolioPage({ onBack }) {
               <h2>Featured Projects</h2>
             </div>
 
-            <div className="projects-grid">
+            <div className="projects-grid" ref={projectsGridRef}>
               {projects.map((project) => (
                 <article className="project-card" key={project.title}>
                   <div className="project-top">
@@ -266,7 +198,7 @@ function PortfolioPage({ onBack }) {
                     <button
                       type="button"
                       className="details-button"
-                      onClick={(event) => openProjectModal(project, event)}
+                      onClick={() => openProjectModal(project)}
                     >
                       Details →
                     </button>
