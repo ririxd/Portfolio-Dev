@@ -644,6 +644,7 @@ button {
   opacity: 0;
   transform: translateY(22px) scale(0.96);
   animation: modalIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding-top: 200vh;
 }
 
 .linkedin-modal-title {
