@@ -86,8 +86,11 @@ function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [projectModalStyle, setProjectModalStyle] = useState({})
   const [linkedInModalStyle, setLinkedInModalStyle] = useState({})
+  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
+  const [expandedIndex, setExpandedIndex] = useState(null)
   const projectAnchorRef = useRef(null)
   const linkedinAnchorRef = useRef(null)
+  const projectsSectionRef = useRef(null)
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
@@ -414,17 +417,13 @@ function PortfolioPage({ onBack }) {
           </footer>
         </main>
 
-        <button
-          type="button"
-          className="details-button"
-          onClick={(event) => openProjectModal(project, event)}
-        >
-          Details →
-        </button>
-
         {selectedProject && (
           <div className="project-modal-overlay" onClick={() => setSelectedProject(null)}>
-            <div className="project-modal" style={projectModalStyle} onClick={(e) => e.stopPropagation()}>
+            <div
+              className="project-modal"
+              style={projectModalStyle}
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="modal-header">
                 <span className="modal-category">{selectedProject.category}</span>
                 <h3>{selectedProject.title}</h3>
@@ -457,8 +456,15 @@ function PortfolioPage({ onBack }) {
         )}
 
         {isLinkedInModalOpen && (
-          <div className="linkedin-modal-overlay" onClick={() => setIsLinkedInModalOpen(false)}>
-            <div className="linkedin-modal" style={linkedInModalStyle} onClick={(e) => e.stopPropagation()}>
+          <div
+            className="linkedin-modal-overlay"
+            onClick={() => setIsLinkedInModalOpen(false)}
+          >
+            <div
+              className="linkedin-modal"
+              style={linkedInModalStyle}
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
                 type="button"
                 className="linkedin-modal-close"
@@ -491,7 +497,7 @@ function PortfolioPage({ onBack }) {
             </div>
           </div>
         )}
-      </>
+      </div>
     </>
   )
 }

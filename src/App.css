@@ -609,21 +609,98 @@ button {
   transform: translateY(-1px);
 }
 
-.linkedin-modal-overlay,
-.project-modal-overlay {
+/* LinkedIn modal */
+.linkedin-modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(7, 12, 19, 0.78);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.linkedin-modal {
+  position: fixed;
+  width: min(520px, 92vw);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2.6rem 1.5rem 2.2rem;
+  border: 1px solid rgba(126, 231, 197, 0.55);
+  border-radius: 24px;
+  background: #111827;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(22px) scale(0.96);
+  animation: modalIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.linkedin-modal-title {
+  width: 100%;
+  margin: 0 0 2.4rem;
+  text-align: center;
+  font-size: clamp(1.7rem, 3vw, 2rem);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.linkedin-profile-card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: visible;
+  min-width: 0;
+}
+
+.linkedin-profile-card .LI-profile-badge {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: auto !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.linkedin-profile-card .badge-base__link {
+  display: none !important;
+}
+
+.linkedin-modal-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Project modal */
+.project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
   background: rgba(7, 12, 19, 0.72);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
 
-.project-modal-overlay {
-  z-index: 900;
-}
-
-.linkedin-modal,
 .project-modal {
   position: fixed;
   margin: 0;
