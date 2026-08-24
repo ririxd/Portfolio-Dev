@@ -113,6 +113,9 @@ function PortfolioPage({ onBack }) {
       left = clamp(left, 10, vw - width - 10)
     }
 
+    // shift modal slightly left
+    left = left - (isMobile ? 10 : 24)
+
     setProjectModalStyle({
       position: 'fixed',
       top: `${Math.round(top)}px`,
@@ -170,6 +173,30 @@ function PortfolioPage({ onBack }) {
       window.removeEventListener('scroll', onViewportChange)
     }
   }, [selectedProject, isLinkedInModalOpen])
+
+  useEffect(() => {
+    if (!isLinkedInModalOpen) return
+
+    const runParse = () => {
+      if (window.IN && typeof window.IN.parse === 'function') {
+        window.IN.parse()
+      }
+    }
+
+    const existing = document.getElementById('linkedin-badge-script')
+    if (existing) {
+      runParse()
+      return
+    }
+
+    const script = document.createElement('script')
+    script.id = 'linkedin-badge-script'
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
+    script.async = true
+    script.defer = true
+    script.onload = runParse
+    document.body.appendChild(script)
+  }, [isLinkedInModalOpen])
 
   return (
     <>
