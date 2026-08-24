@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const projects = [
   {
@@ -85,26 +85,26 @@ const learningItems = [
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
-  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
+  const projectsSectionRef = useRef(null)
 
-  useEffect(() => {
-    if (!isLinkedInModalOpen) return undefined
+  const openProjectModal = (project) => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
 
-    let script
-    const frame = requestAnimationFrame(() => {
-      script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-      script.async = true
-      script.defer = true
-      document.body.appendChild(script)
-    })
+    if (isMobile && projectsSectionRef.current) {
+      projectsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-    return () => {
-      cancelAnimationFrame(frame)
-      script?.remove()
+      window.setTimeout(() => {
+        const rect = projectsSectionRef.current.getBoundingClientRect()
+        const top = Math.max(72, Math.min(rect.top + 8, window.innerHeight * 0.35))
+        document.documentElement.style.setProperty('--project-modal-mobile-top', `${Math.round(top)}px`)
+        setSelectedProject(project)
+      }, 220)
+
+      return
     }
-  }, [isLinkedInModalOpen])
+
+    setSelectedProject(project)
+  }
 
   return (
     <div className="portfolio-page">
@@ -141,7 +141,7 @@ function PortfolioPage({ onBack }) {
           </div>
         </section>
 
-        <section id="projects" className="section">
+        <section id="projects" className="section" ref={projectsSectionRef}>
           <div className="section-heading">
             <h2>Featured Projects</h2>
           </div>
@@ -173,7 +173,7 @@ function PortfolioPage({ onBack }) {
                   <button
                     type="button"
                     className="details-button"
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => openProjectModal(project)}
                   >
                     Details →
                   </button>
@@ -354,12 +354,10 @@ function PortfolioPage({ onBack }) {
       {selectedProject && (
         <div
           className="project-modal-overlay"
+          data-anchor="projects"
           onClick={() => setSelectedProject(null)}
         >
-          <div
-            className="project-modal"
-            onClick={(event) => event.stopPropagation()}
-          >
+          <div className="project-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
               <span className="modal-category">{selectedProject.category}</span>
               <h3>{selectedProject.title}</h3>
