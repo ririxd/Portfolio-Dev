@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const projects = [
   {
@@ -84,392 +84,415 @@ const learningItems = [
 
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
-  const [expandedIndex, setExpandedIndex] = useState(null)
-  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
-  const projectsSectionRef = useRef(null)
+  const [projectModalStyle, setProjectModalStyle] = useState({})
+  const [linkedInModalStyle, setLinkedInModalStyle] = useState({})
+  const projectAnchorRef = useRef(null)
+  const linkedinAnchorRef = useRef(null)
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
-  const positionProjectModal = () => {
-    if (!projectsSectionRef.current) return
-
-    const rect = projectsSectionRef.current.getBoundingClientRect()
+  const computeProjectModalPosition = (anchorRect) => {
     const isMobile = window.matchMedia('(max-width: 768px)').matches
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const gap = 14
+
+    const width = isMobile ? Math.min(vw - 16, 620) : Math.min(520, Math.round(vw * 0.38))
+    let left
+    let top = clamp(anchorRect.top + 6, 10, vh - 460)
 
     if (isMobile) {
-      const top = clamp(rect.top + 8, 72, window.innerHeight * 0.35)
-      document.documentElement.style.setProperty('--project-modal-top', `${Math.round(top)}px`)
-      document.documentElement.style.setProperty('--project-modal-right', `3vw`)
-      return
+      left = Math.round((vw - width) / 2)
+      top = clamp(anchorRect.top + 8, 10, vh - 520)
+    } else {
+      const fitsRight = anchorRect.right + gap + width <= vw - 12
+      left = fitsRight ? anchorRect.right + gap : anchorRect.left - width - gap
+      left = clamp(left, 10, vw - width - 10)
     }
 
-    // Desktop / widescreen: right column, aligned near Featured Projects section
-    const top = clamp(rect.top + 18, 84, window.innerHeight - 440)
-    const right = clamp(window.innerWidth - rect.right + 20, 24, 160)
-
-    document.documentElement.style.setProperty('--project-modal-top', `${Math.round(top)}px`)
-    document.documentElement.style.setProperty('--project-modal-right', `${Math.round(right)}px`)
+    setProjectModalStyle({
+      position: 'fixed',
+      top: `${Math.round(top)}px`,
+      left: `${Math.round(left)}px`,
+      width: `${Math.round(width)}px`,
+      maxHeight: isMobile ? '78vh' : '72vh',
+    })
   }
 
-  const openProjectModal = (project) => {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
+  const computeLinkedInModalPosition = (anchorRect) => {
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const width = Math.min(430, vw - 16)
+    const left = clamp(anchorRect.left + anchorRect.width / 2 - width / 2, 8, vw - width - 8)
+    const top = clamp(anchorRect.bottom + 10, 10, vh - 420)
 
-    if (isMobile && projectsSectionRef.current) {
-      projectsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      window.setTimeout(() => {
-        positionProjectModal()
-        setSelectedProject(project)
-      }, 220)
-      return
+    setLinkedInModalStyle({
+      position: 'fixed',
+      top: `${Math.round(top)}px`,
+      left: `${Math.round(left)}px`,
+      width: `${Math.round(width)}px`,
+      maxHeight: '80vh',
+    })
+  }
+
+  const openProjectModal = (project, event) => {
+    const card = event.currentTarget.closest('.project-card')
+    if (card) {
+      projectAnchorRef.current = card
+      computeProjectModalPosition(card.getBoundingClientRect())
     }
-
-    positionProjectModal()
     setSelectedProject(project)
   }
 
+  const openLinkedInModal = (event) => {
+    linkedinAnchorRef.current = event.currentTarget
+    computeLinkedInModalPosition(event.currentTarget.getBoundingClientRect())
+    setIsLinkedInModalOpen(true)
+  }
+
   useEffect(() => {
-    if (!selectedProject) return
-
-    const syncPosition = () => positionProjectModal()
-    window.addEventListener('resize', syncPosition)
-    window.addEventListener('scroll', syncPosition, { passive: true })
-    syncPosition()
-
-    return () => {
-      window.removeEventListener('resize', syncPosition)
-      window.removeEventListener('scroll', syncPosition)
+    const onViewportChange = () => {
+      if (selectedProject && projectAnchorRef.current) {
+        computeProjectModalPosition(projectAnchorRef.current.getBoundingClientRect())
+      }
+      if (isLinkedInModalOpen && linkedinAnchorRef.current) {
+        computeLinkedInModalPosition(linkedinAnchorRef.current.getBoundingClientRect())
+      }
     }
-  }, [selectedProject])
+
+    window.addEventListener('resize', onViewportChange)
+    window.addEventListener('scroll', onViewportChange, { passive: true })
+    return () => {
+      window.removeEventListener('resize', onViewportChange)
+      window.removeEventListener('scroll', onViewportChange)
+    }
+  }, [selectedProject, isLinkedInModalOpen])
 
   return (
-    <div className="portfolio-page">
-      <div className="portfolio-topbar">
-        <button className="return-button" onClick={onBack}>
-          Return
-        </button>
-      </div>
+    <>
+      <div className="portfolio-page">
+        <div className="portfolio-topbar">
+          <button className="return-button" onClick={onBack}>
+            Return
+          </button>
+        </div>
 
-      <main className="portfolio-content">
-        <section id="about" className="section">
-          <div className="section-heading section-heading-center">
-            <h2>About Me</h2>
-          </div>
-
-          <p className="section-text">
-            I'm a Computer Engineering student interested in software engineering,
-            embedded systems, and practical technology solutions.
-          </p>
-        </section>
-
-        <section id="skills" className="section">
-          <div className="section-heading">
-            <h2>Skills</h2>
-          </div>
-
-          <div className="skills-grid">
-            {skills.map((skill) => (
-              <div key={skill.name} className="skill-card">
-                <img src={skill.logo} alt={skill.name} className="skill-logo" />
-                <span>{skill.name}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="projects" className="section" ref={projectsSectionRef}>
-          <div className="section-heading">
-            <h2>Featured Projects</h2>
-          </div>
-
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <article className="project-card" key={project.title}>
-                <div className="project-top">
-                  <span className="project-folder">⌁</span>
-                  <span className="project-category">{project.category}</span>
-                </div>
-
-                <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-
-                <div className="technology-list">
-                  {project.technologies.map((technology) => (
-                    <span key={technology}>{technology}</span>
-                  ))}
-                </div>
-
-                <div className="project-links">
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noreferrer">
-                      GitHub ↗
-                    </a>
-                  )}
-
-                  <button
-                    type="button"
-                    className="details-button"
-                    onClick={() => openProjectModal(project)}
-                  >
-                    Details →
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="education" className="section">
-          <div className="section-heading">
-            <h2>Education</h2>
-          </div>
-
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <span className="timeline-date">2023 — PRESENT</span>
-                <h3>National University Manila</h3>
-                <h4>Bachelor of Science in Computer Engineering</h4>
-                <p>
-                  Developing knowledge and practical experience in software
-                  development, computer architecture, embedded systems,
-                  networking, electronics, and digital systems.
-                </p>
-              </div>
+        <main className="portfolio-content">
+          <section id="about" className="section">
+            <div className="section-heading section-heading-center">
+              <h2>About Me</h2>
             </div>
 
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <span className="timeline-date">2021 — 2023</span>
-                <h3>Technological Institute of the Philippines</h3>
-                <h4>Science, Technology, Engineering and Mathematics</h4>
-                <p>
-                  Built a strong foundation in science, mathematics, engineering,
-                  and technology through STEM-focused academic learning and projects.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section-heading">
-            <h2>Researches Conducted</h2>
-          </div>
-
-          <div className="research-card">
-            <span className="research-tag">2024</span>
-            <h3>
-              Throughput, Fairness, and Retransmission Behavior of TCP Reno and TCP
-              Cubic Under Packet Loss in High-Latency Networks
-            </h3>
-            <p className="research-description">
-              Investigated how packet loss affects network performance, fairness, and
-              retransmission behavior in high-latency environments using TCP Reno and
-              TCP Cubic.
+            <p className="section-text">
+              I'm a Computer Engineering student interested in software engineering,
+              embedded systems, and practical technology solutions.
             </p>
+          </section>
 
-            <div className="research-links">
-              <a
-                href="https://drive.google.com/file/d/1V8ZnEp7KUkEFpMV7AsBus6emRFuzRauE/view?usp=sharing"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Read Paper →
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section-heading">
-            <h2>Awards</h2>
-          </div>
-
-          <div className="awards-grid">
-            <div className="award-card">
-              <span className="award-badge">2023</span>
-              <h3>Graduated with Honors</h3>
-              <p>
-                Completed the Science, Technology, Engineering and Mathematics strand
-                with a GWA of 92.5, reflecting strong academic excellence and
-                consistency.
-              </p>
+          <section id="skills" className="section">
+            <div className="section-heading">
+              <h2>Skills</h2>
             </div>
 
-            <div className="award-card">
-              <span className="award-badge">2025</span>
-              <h3>IT Customer Support Basics</h3>
-              <p>
-                Completed the IT Customer Support Basics under CISCO Networking Academy,
-                gaining foundational knowledge in IT support.
-              </p>
-
-              <div className="award-links">
-                <a
-                  href="https://www.credly.com/badges/3ad82f00-9951-40fb-b414-6a46bbe8add0"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View Badge
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section learning-section">
-          <div className="section-heading">
-            <h2>Currently Learning</h2>
-          </div>
-
-          <div className="learning-grid">
-            {learningItems.map((item, index) => (
-              <div
-                key={item.id}
-                className={`learning-card ${expandedIndex === index ? 'expanded' : ''}`}
-                onMouseEnter={() => setExpandedIndex(index)}
-                onMouseLeave={() => setExpandedIndex(null)}
-                onFocus={() => setExpandedIndex(index)}
-                onBlur={() => setExpandedIndex(null)}
-                tabIndex={0}
-              >
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <h3>{item.title}</h3>
-                <p>{item.short}</p>
-                <div className="learning-detail">{item.detail}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="contact" className="contact-section">
-          <span className="contact-number">What's next?</span>
-
-          <h2>Let's build something.</h2>
-
-          <p>
-            I'm currently building my skills, projects, and experience as I work
-            toward a career in software engineering. Work and Grow with me!
-          </p>
-
-          <a href="mailto:ricardoespinosa.dev@gmail.com" className="primary-button">
-            Say Hello →
-          </a>
-
-          <div className="social-links">
-            <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-
-            <button
-              type="button"
-              className="linkedin-button"
-              onClick={() => setIsLinkedInModalOpen(true)}
-            >
-              LinkedIn
-            </button>
-
-          </div>
-        </section>
-
-        <footer className="built-footer">
-          <div className="built-footer-inner">
-            <p>
-              <span>Built by:</span> Ricardo
-            </p>
-            <p>
-              <span>Built with:</span> React, CSS, JavaScript, Vite
-            </p>
-          </div>
-        </footer>
-      </main>
-
-      {selectedProject && (
-        <div
-          className="project-modal-overlay"
-          data-anchor="projects"
-          onClick={() => setSelectedProject(null)}
-        >
-          <div className="project-modal" onClick={(event) => event.stopPropagation()}>
-            <div className="modal-header">
-              <span className="modal-category">{selectedProject.category}</span>
-              <h3>{selectedProject.title}</h3>
-            </div>
-
-            <ul className="modal-list">
-              <li>
-                <span className="modal-summary">{selectedProject.summary}</span>
-              </li>
-              <li>
-                <span className="modal-description">{selectedProject.description}</span>
-              </li>
-            </ul>
-
-            <div className="technology-list modal-tech">
-              {selectedProject.technologies.map((technology) => (
-                <span key={technology}>{technology}</span>
+            <div className="skills-grid">
+              {skills.map((skill) => (
+                <div key={skill.name} className="skill-card">
+                  <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                  <span>{skill.name}</span>
+                </div>
               ))}
             </div>
+          </section>
 
-            {selectedProject.github && (
-              <div className="modal-actions">
-                <a href={selectedProject.github} target="_blank" rel="noreferrer">
-                  GitHub ↗
-                </a>
+          <section id="projects" className="section" ref={projectsSectionRef}>
+            <div className="section-heading">
+              <h2>Featured Projects</h2>
+            </div>
+
+            <div className="projects-grid">
+              {projects.map((project) => (
+                <article className="project-card" key={project.title}>
+                  <div className="project-top">
+                    <span className="project-folder">⌁</span>
+                    <span className="project-category">{project.category}</span>
+                  </div>
+
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+
+                  <div className="technology-list">
+                    {project.technologies.map((technology) => (
+                      <span key={technology}>{technology}</span>
+                    ))}
+                  </div>
+
+                  <div className="project-links">
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noreferrer">
+                        GitHub ↗
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      className="details-button"
+                      onClick={(event) => openProjectModal(project, event)}
+                    >
+                      Details →
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="education" className="section">
+            <div className="section-heading">
+              <h2>Education</h2>
+            </div>
+
+            <div className="timeline">
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <span className="timeline-date">2023 — PRESENT</span>
+                  <h3>National University Manila</h3>
+                  <h4>Bachelor of Science in Computer Engineering</h4>
+                  <p>
+                    Developing knowledge and practical experience in software
+                    development, computer architecture, embedded systems,
+                    networking, electronics, and digital systems.
+                  </p>
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-      )}
 
-      {isLinkedInModalOpen && (
-        <div
-          className="linkedin-modal-overlay"
-          onClick={() => setIsLinkedInModalOpen(false)}
-        >
-          <div
-            className="linkedin-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="linkedin-modal-title"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="linkedin-modal-close"
-              aria-label="Close LinkedIn profile"
-              onClick={() => setIsLinkedInModalOpen(false)}
-            >
-              ×
-            </button>
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <span className="timeline-date">2021 — 2023</span>
+                  <h3>Technological Institute of the Philippines</h3>
+                  <h4>Science, Technology, Engineering and Mathematics</h4>
+                  <p>
+                    Built a strong foundation in science, mathematics, engineering,
+                    and technology through STEM-focused academic learning and projects.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-            <div className="linkedin-profile-card">
-              <div
-                className="badge-base LI-profile-badge"
-                data-locale="en_US"
-                data-size="medium"
-                data-theme="dark"
-                data-type="HORIZONTAL"
-                data-vanity="ricardo-david-espinosa-b8451142b"
-                data-version="v1"
-              >
+          <section className="section">
+            <div className="section-heading">
+              <h2>Researches Conducted</h2>
+            </div>
+
+            <div className="research-card">
+              <span className="research-tag">2024</span>
+              <h3>
+                Throughput, Fairness, and Retransmission Behavior of TCP Reno and TCP
+                Cubic Under Packet Loss in High-Latency Networks
+              </h3>
+              <p className="research-description">
+                Investigated how packet loss affects network performance, fairness, and
+                retransmission behavior in high-latency environments using TCP Reno and
+                TCP Cubic.
+              </p>
+
+              <div className="research-links">
                 <a
-                  className="badge-base__link LI-simple-link"
-                  href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
+                  href="https://drive.google.com/file/d/1V8ZnEp7KUkEFpMV7AsBus6emRFuzRauE/view?usp=sharing"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Ricardo David Espinosa
+                  Read Paper →
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </section>
 
-    </div>
+          <section className="section">
+            <div className="section-heading">
+              <h2>Awards</h2>
+            </div>
+
+            <div className="awards-grid">
+              <div className="award-card">
+                <span className="award-badge">2023</span>
+                <h3>Graduated with Honors</h3>
+                <p>
+                  Completed the Science, Technology, Engineering and Mathematics strand
+                  with a GWA of 92.5, reflecting strong academic excellence and
+                  consistency.
+                </p>
+              </div>
+
+              <div className="award-card">
+                <span className="award-badge">2025</span>
+                <h3>IT Customer Support Basics</h3>
+                <p>
+                  Completed the IT Customer Support Basics under CISCO Networking Academy,
+                  gaining foundational knowledge in IT support.
+                </p>
+
+                <div className="award-links">
+                  <a
+                    href="https://www.credly.com/badges/3ad82f00-9951-40fb-b414-6a46bbe8add0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Badge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="section learning-section">
+            <div className="section-heading">
+              <h2>Currently Learning</h2>
+            </div>
+
+            <div className="learning-grid">
+              {learningItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`learning-card ${expandedIndex === index ? 'expanded' : ''}`}
+                  onMouseEnter={() => setExpandedIndex(index)}
+                  onMouseLeave={() => setExpandedIndex(null)}
+                  onFocus={() => setExpandedIndex(index)}
+                  onBlur={() => setExpandedIndex(null)}
+                  tabIndex={0}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.short}</p>
+                  <div className="learning-detail">{item.detail}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="contact" className="contact-section">
+            <span className="contact-number">What's next?</span>
+
+            <h2>Let's build something.</h2>
+
+            <p>
+              I'm currently building my skills, projects, and experience as I work
+              toward a career in software engineering. Work and Grow with me!
+            </p>
+
+            <a href="mailto:ricardoespinosa.dev@gmail.com" className="primary-button">
+              Say Hello →
+            </a>
+
+            <div className="social-links">
+              <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+
+              <button
+                type="button"
+                className="linkedin-button"
+                onClick={openLinkedInModal}
+              >
+                LinkedIn
+              </button>
+
+            </div>
+          </section>
+
+          <footer className="built-footer">
+            <div className="built-footer-inner">
+              <p>
+                <span>Built by:</span> Ricardo
+              </p>
+              <p>
+                <span>Built with:</span> React, CSS, JavaScript, Vite
+              </p>
+            </div>
+          </footer>
+        </main>
+
+        <button
+          type="button"
+          className="details-button"
+          onClick={(event) => openProjectModal(project, event)}
+        >
+          Details →
+        </button>
+
+        {selectedProject && (
+          <div className="project-modal-overlay" onClick={() => setSelectedProject(null)}>
+            <div className="project-modal" style={projectModalStyle} onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <span className="modal-category">{selectedProject.category}</span>
+                <h3>{selectedProject.title}</h3>
+              </div>
+
+              <ul className="modal-list">
+                <li>
+                  <span className="modal-summary">{selectedProject.summary}</span>
+                </li>
+                <li>
+                  <span className="modal-description">{selectedProject.description}</span>
+                </li>
+              </ul>
+
+              <div className="technology-list modal-tech">
+                {selectedProject.technologies.map((technology) => (
+                  <span key={technology}>{technology}</span>
+                ))}
+              </div>
+
+              {selectedProject.github && (
+                <div className="modal-actions">
+                  <a href={selectedProject.github} target="_blank" rel="noreferrer">
+                    GitHub ↗
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {isLinkedInModalOpen && (
+          <div className="linkedin-modal-overlay" onClick={() => setIsLinkedInModalOpen(false)}>
+            <div className="linkedin-modal" style={linkedInModalStyle} onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                className="linkedin-modal-close"
+                aria-label="Close LinkedIn profile"
+                onClick={() => setIsLinkedInModalOpen(false)}
+              >
+                ×
+              </button>
+
+              <div className="linkedin-profile-card">
+                <div
+                  className="badge-base LI-profile-badge"
+                  data-locale="en_US"
+                  data-size="medium"
+                  data-theme="dark"
+                  data-type="HORIZONTAL"
+                  data-vanity="ricardo-david-espinosa-b8451142b"
+                  data-version="v1"
+                >
+                  <a
+                    className="badge-base__link LI-simple-link"
+                    href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ricardo David Espinosa
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    </>
   )
 }
 
