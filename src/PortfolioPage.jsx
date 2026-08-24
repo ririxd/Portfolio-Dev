@@ -85,26 +85,61 @@ const learningItems = [
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [expandedIndex, setExpandedIndex] = useState(null)
+  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
   const projectsSectionRef = useRef(null)
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+
+  const positionProjectModal = () => {
+    if (!projectsSectionRef.current) return
+
+    const rect = projectsSectionRef.current.getBoundingClientRect()
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+
+    if (isMobile) {
+      const top = clamp(rect.top + 8, 72, window.innerHeight * 0.35)
+      document.documentElement.style.setProperty('--project-modal-top', `${Math.round(top)}px`)
+      document.documentElement.style.setProperty('--project-modal-right', `3vw`)
+      return
+    }
+
+    // Desktop / widescreen: right column, aligned near Featured Projects section
+    const top = clamp(rect.top + 18, 84, window.innerHeight - 440)
+    const right = clamp(window.innerWidth - rect.right + 20, 24, 160)
+
+    document.documentElement.style.setProperty('--project-modal-top', `${Math.round(top)}px`)
+    document.documentElement.style.setProperty('--project-modal-right', `${Math.round(right)}px`)
+  }
 
   const openProjectModal = (project) => {
     const isMobile = window.matchMedia('(max-width: 768px)').matches
 
     if (isMobile && projectsSectionRef.current) {
       projectsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-
       window.setTimeout(() => {
-        const rect = projectsSectionRef.current.getBoundingClientRect()
-        const top = Math.max(72, Math.min(rect.top + 8, window.innerHeight * 0.35))
-        document.documentElement.style.setProperty('--project-modal-mobile-top', `${Math.round(top)}px`)
+        positionProjectModal()
         setSelectedProject(project)
       }, 220)
-
       return
     }
 
+    positionProjectModal()
     setSelectedProject(project)
   }
+
+  useEffect(() => {
+    if (!selectedProject) return
+
+    const syncPosition = () => positionProjectModal()
+    window.addEventListener('resize', syncPosition)
+    window.addEventListener('scroll', syncPosition, { passive: true })
+    syncPosition()
+
+    return () => {
+      window.removeEventListener('resize', syncPosition)
+      window.removeEventListener('scroll', syncPosition)
+    }
+  }, [selectedProject])
 
   return (
     <div className="portfolio-page">
