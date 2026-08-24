@@ -701,7 +701,7 @@ button {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   padding-top: var(--project-modal-mobile-top);
-  padding-top: 50px;
+  padding-top: 50vh;
 }
 
 .project-modal {
