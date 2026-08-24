@@ -1,68 +1,463 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const projects = [
+  {
+    title: 'Wireless RC Car',
+    category: 'Embedded Systems',
+    summary:
+      'A wireless-controlled vehicle using Arduino, NRF24L01 communication, motor drivers, and servo control.',
+    description:
+      'This project focused on building a remote-controlled vehicle using Arduino, radio communication, motor control, and sensor-based movement logic. It combined embedded systems knowledge with hardware integration and control design.',
+    technologies: ['Arduino', 'C++', 'NRF24L01', 'L298N'],
+    github: 'https://github.com/ririxd',
+  },
+  {
+    title: 'Hardware Inventory System',
+    category: 'Software',
+    summary:
+      'A software application designed to manage hardware items, quantities, records, and inventory information.',
+    description:
+      'The inventory system was created to organize hardware records, track quantities, and simplify data access for maintenance and asset monitoring tasks. It emphasizes practical usability and efficient record handling.',
+    technologies: ['Python', 'SQLite', 'CRUD'],
+    github: 'https://github.com/ririxd/sample-programs--py-db-sqlite3-',
+  },
+  {
+    title: 'Custom PCB Project',
+    category: 'Hardware',
+    summary:
+      'A custom electronics board designed and routed using KiCad, including schematic design and PCB layout.',
+    description:
+      'This project involved schematic capture and PCB layout for a custom electronics circuit. It focused on practical hardware design, electrical planning, and implementing a board for a real-world application.',
+    technologies: ['KiCad', 'PCB Design', 'Electronics'],
+    github: null,
+  },
+  {
+    title: 'Network Configuration Projects',
+    category: 'Networking',
+    summary:
+      'Hands-on networking projects involving IP addressing, subnetting, network troubleshooting, and packet analysis.',
+    description:
+      'These networking exercises centered on IP addressing, subnet design, troubleshooting, and analyzing packet behavior to improve understanding of real-world network configuration and communication.',
+    technologies: ['Networking', 'IPv4', 'IPv6', 'Cisco Packet Tracer'],
+    github: null,
+  },
+]
+
+const skills = [
+  { name: 'Python', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/python.svg' },
+  { name: 'Java', logo: 'https://cdn.simpleicons.org/openjdk/ffffff' },
+  { name: 'C++', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/cplusplus.svg' },
+  { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/javascript.svg' },
+  { name: 'React', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/react.svg' },
+  { name: 'HTML', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/html5.svg' },
+  { name: 'CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/css3.svg' },
+  { name: 'SQL', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/mysql.svg' },
+  { name: 'Cisco Packet Tracer', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/cisco.svg' },
+  { name: 'Git', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/git.svg' },
+  { name: 'Arduino', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/arduino.svg' },
+  { name: 'KiCad', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/kicad.svg' },
+]
+
+const learningItems = [
+  {
+    id: 1,
+    title: 'React & TypeScript',
+    short: 'Building modern, maintainable frontend applications.',
+    detail:
+      'Focused on reusable components, type safety, and scalable frontend architecture.',
+  },
+  {
+    id: 2,
+    title: 'Backend Development',
+    short: 'Learning APIs, databases, authentication, and server-side development.',
+    detail:
+      'Exploring REST APIs, database design, auth flows, and full-stack integration patterns.',
+  },
+  {
+    id: 3,
+    title: 'Data Structures',
+    short: 'Improving problem-solving and algorithmic thinking for software engineering.',
+    detail:
+      'Strengthening algorithmic thinking through arrays, trees, graphs, and optimization strategies.',
+  },
+]
 
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
+  const [projectModalStyle, setProjectModalStyle] = useState({})
+  const projectsGridRef = useRef(null)
 
-  const projects = [
-    {
-      title: 'Wireless RC Car',
-      category: 'Embedded Systems',
-      summary: 'A wireless-controlled vehicle using Arduino, NRF24L01 communication, motor drivers, and servo control.',
-      description: 'Project details here.',
-      technologies: ['Arduino', 'C++', 'NRF24L01', 'L298N'],
-      github: '#',
-    },
-  ]
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+
+  const placeProjectModalInGridCenter = () => {
+    const grid = projectsGridRef.current
+    if (!grid) return
+
+    const rect = grid.getBoundingClientRect()
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+
+    const width = isMobile ? Math.min(vw - 16, 620) : Math.min(560, Math.round(vw * 0.36))
+    const estimatedHeight = isMobile ? 520 : 460
+
+    // Center of the rectangle you drew (middle of the 2x2 featured-project cards)
+    const left = clamp(rect.left + rect.width / 2 - width / 2, 8, vw - width - 8)
+    const top = clamp(rect.top + rect.height / 2 - estimatedHeight / 2, 72, vh - estimatedHeight - 12)
+
+    setProjectModalStyle({
+      position: 'fixed',
+      left: `${Math.round(left)}px`,
+      top: `${Math.round(top)}px`,
+      width: `${Math.round(width)}px`,
+      maxHeight: isMobile ? '78vh' : '72vh',
+    })
+  }
+
+  const openProjectModal = (project) => {
+    placeProjectModalInGridCenter()
+    setSelectedProject(project)
+  }
+
+  useEffect(() => {
+    if (!selectedProject) return
+    const sync = () => placeProjectModalInGridCenter()
+    window.addEventListener('resize', sync)
+    window.addEventListener('scroll', sync, { passive: true })
+    return () => {
+      window.removeEventListener('resize', sync)
+      window.removeEventListener('scroll', sync)
+    }
+  }, [selectedProject])
 
   return (
-    <div className="portfolio-page">
-      <div className="portfolio-topbar">
-        <button className="return-button" onClick={onBack}>Return</button>
-      </div>
-
-      <main className="portfolio-content">
-        <section className="section">
-          <div className="section-heading">
-            <h2>Featured Projects</h2>
-          </div>
-
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <article className="project-card" key={project.title}>
-                <div className="project-top">
-                  <span className="project-folder">⌁</span>
-                  <span className="project-category">{project.category}</span>
-                </div>
-                <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-                <div className="technology-list">
-                  {project.technologies.map((tech) => <span key={tech}>{tech}</span>)}
-                </div>
-                <div className="project-links">
-                  <a href={project.github}>GitHub ↗</a>
-                  <button className="details-button" onClick={() => setSelectedProject(project)}>
-                    Details →
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {selectedProject && (
-        <div className="project-modal-overlay" onClick={() => setSelectedProject(null)}>
-          <div className="project-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <span className="modal-category">{selectedProject.category}</span>
-              <h3>{selectedProject.title}</h3>
-            </div>
-            <p className="modal-summary">{selectedProject.summary}</p>
-            <p className="modal-description">{selectedProject.description}</p>
-          </div>
+    <>
+      <div className="portfolio-page">
+        <div className="portfolio-topbar">
+          <button className="return-button" onClick={onBack}>
+            Return
+          </button>
         </div>
-      )}
-    </div>
+
+        <main className="portfolio-content">
+          <section id="about" className="section">
+            <div className="section-heading section-heading-center">
+              <h2>About Me</h2>
+            </div>
+
+            <p className="section-text">
+              I'm a Computer Engineering student interested in software engineering,
+              embedded systems, and practical technology solutions.
+            </p>
+          </section>
+
+          <section id="skills" className="section">
+            <div className="section-heading">
+              <h2>Skills</h2>
+            </div>
+
+            <div className="skills-grid">
+              {skills.map((skill) => (
+                <div key={skill.name} className="skill-card">
+                  <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                  <span>{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="projects" className="section" ref={projectsSectionRef}>
+            <div className="section-heading">
+              <h2>Featured Projects</h2>
+            </div>
+
+            <div className="projects-grid" ref={projectsGridRef}>
+              {projects.map((project) => (
+                <article className="project-card" key={project.title}>
+                  <div className="project-top">
+                    <span className="project-folder">⌁</span>
+                    <span className="project-category">{project.category}</span>
+                  </div>
+
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+
+                  <div className="technology-list">
+                    {project.technologies.map((technology) => (
+                      <span key={technology}>{technology}</span>
+                    ))}
+                  </div>
+
+                  <div className="project-links">
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noreferrer">
+                        GitHub ↗
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      className="details-button"
+                      onClick={() => openProjectModal(project)}
+                    >
+                      Details →
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="education" className="section">
+            <div className="section-heading">
+              <h2>Education</h2>
+            </div>
+
+            <div className="timeline">
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <span className="timeline-date">2023 — PRESENT</span>
+                  <h3>National University Manila</h3>
+                  <h4>Bachelor of Science in Computer Engineering</h4>
+                  <p>
+                    Developing knowledge and practical experience in software
+                    development, computer architecture, embedded systems,
+                    networking, electronics, and digital systems.
+                  </p>
+                </div>
+              </div>
+
+              <div className="timeline-item">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content">
+                  <span className="timeline-date">2021 — 2023</span>
+                  <h3>Technological Institute of the Philippines</h3>
+                  <h4>Science, Technology, Engineering and Mathematics</h4>
+                  <p>
+                    Built a strong foundation in science, mathematics, engineering,
+                    and technology through STEM-focused academic learning and projects.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="section-heading">
+              <h2>Researches Conducted</h2>
+            </div>
+
+            <div className="research-card">
+              <span className="research-tag">2024</span>
+              <h3>
+                Throughput, Fairness, and Retransmission Behavior of TCP Reno and TCP
+                Cubic Under Packet Loss in High-Latency Networks
+              </h3>
+              <p className="research-description">
+                Investigated how packet loss affects network performance, fairness, and
+                retransmission behavior in high-latency environments using TCP Reno and
+                TCP Cubic.
+              </p>
+
+              <div className="research-links">
+                <a
+                  href="https://drive.google.com/file/d/1V8ZnEp7KUkEFpMV7AsBus6emRFuzRauE/view?usp=sharing"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read Paper →
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="section-heading">
+              <h2>Awards</h2>
+            </div>
+
+            <div className="awards-grid">
+              <div className="award-card">
+                <span className="award-badge">2023</span>
+                <h3>Graduated with Honors</h3>
+                <p>
+                  Completed the Science, Technology, Engineering and Mathematics strand
+                  with a GWA of 92.5, reflecting strong academic excellence and
+                  consistency.
+                </p>
+              </div>
+
+              <div className="award-card">
+                <span className="award-badge">2025</span>
+                <h3>IT Customer Support Basics</h3>
+                <p>
+                  Completed the IT Customer Support Basics under CISCO Networking Academy,
+                  gaining foundational knowledge in IT support.
+                </p>
+
+                <div className="award-links">
+                  <a
+                    href="https://www.credly.com/badges/3ad82f00-9951-40fb-b414-6a46bbe8add0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Badge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="section learning-section">
+            <div className="section-heading">
+              <h2>Currently Learning</h2>
+            </div>
+
+            <div className="learning-grid">
+              {learningItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`learning-card ${expandedIndex === index ? 'expanded' : ''}`}
+                  onMouseEnter={() => setExpandedIndex(index)}
+                  onMouseLeave={() => setExpandedIndex(null)}
+                  onFocus={() => setExpandedIndex(index)}
+                  onBlur={() => setExpandedIndex(null)}
+                  tabIndex={0}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.short}</p>
+                  <div className="learning-detail">{item.detail}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="contact" className="contact-section">
+            <span className="contact-number">What's next?</span>
+
+            <h2>Let's build something.</h2>
+
+            <p>
+              I'm currently building my skills, projects, and experience as I work
+              toward a career in software engineering. Work and Grow with me!
+            </p>
+
+            <a href="mailto:ricardoespinosa.dev@gmail.com" className="primary-button">
+              Say Hello →
+            </a>
+
+            <div className="social-links">
+              <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+
+              <button
+                type="button"
+                className="linkedin-button"
+                onClick={openLinkedInModal}
+              >
+                LinkedIn
+              </button>
+
+            </div>
+          </section>
+
+          <footer className="built-footer">
+            <div className="built-footer-inner">
+              <p>
+                <span>Built by:</span> Ricardo
+              </p>
+              <p>
+                <span>Built with:</span> React, CSS, JavaScript, Vite
+              </p>
+            </div>
+          </footer>
+        </main>
+
+        {selectedProject && (
+          <div className="project-modal-overlay" onClick={() => setSelectedProject(null)}>
+            <div
+              className="project-modal"
+              style={projectModalStyle}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <span className="modal-category">{selectedProject.category}</span>
+                <h3>{selectedProject.title}</h3>
+              </div>
+
+              <ul className="modal-list">
+                <li>
+                  <span className="modal-summary">{selectedProject.summary}</span>
+                </li>
+                <li>
+                  <span className="modal-description">{selectedProject.description}</span>
+                </li>
+              </ul>
+
+              <div className="technology-list modal-tech">
+                {selectedProject.technologies.map((technology) => (
+                  <span key={technology}>{technology}</span>
+                ))}
+              </div>
+
+              {selectedProject.github && (
+                <div className="modal-actions">
+                  <a href={selectedProject.github} target="_blank" rel="noreferrer">
+                    GitHub ↗
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {isLinkedInModalOpen && (
+          <div
+            className="linkedin-modal-overlay"
+            onClick={() => setIsLinkedInModalOpen(false)}
+          >
+            <div
+              className="linkedin-modal"
+              style={linkedInModalStyle}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="linkedin-modal-close"
+                aria-label="Close LinkedIn profile"
+                onClick={() => setIsLinkedInModalOpen(false)}
+              >
+                ×
+              </button>
+
+              <div className="linkedin-profile-card">
+                <div
+                  className="badge-base LI-profile-badge"
+                  data-locale="en_US"
+                  data-size="medium"
+                  data-theme="dark"
+                  data-type="HORIZONTAL"
+                  data-vanity="ricardo-david-espinosa-b8451142b"
+                  data-version="v1"
+                >
+                  <a
+                    className="badge-base__link LI-simple-link"
+                    href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ricardo David Espinosa
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
