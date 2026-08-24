@@ -715,6 +715,7 @@ button {
   transform: translateY(22px) scale(0.96);
   animation: modalIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: opacity, transform;
+  padding-right: 1.5rem;
 }
 
 @keyframes fadeInOverlay {
