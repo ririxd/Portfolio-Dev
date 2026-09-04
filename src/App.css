@@ -819,6 +819,10 @@ button {
   position: fixed;
   inset: 0;
   z-index: 900;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  overflow-y: auto;
   background: rgba(7, 12, 19, 0.72);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
@@ -827,6 +831,7 @@ button {
 .project-modal {
   position: fixed;
   margin: 0;
+  box-sizing: border-box;
   overflow-y: auto;
   width: min(680px, 92vw);
   background: rgba(15, 23, 38, 0.98);
@@ -1107,6 +1112,18 @@ body {
 
   .project-card h3 {
     font-size: 1.35rem;
+  }
+
+  .project-modal-overlay {
+    align-items: start;
+    padding: 1rem;
+  }
+
+  .project-modal {
+    width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 2rem);
+    padding: 1.25rem;
+    border-radius: 16px;
   }
 
   .project-links {

@@ -104,7 +104,18 @@ function PortfolioPage({ onBack }) {
     const vh = window.innerHeight
     const isMobile = window.matchMedia('(max-width: 768px)').matches
 
-    const width = isMobile ? Math.min(vw - 16, 620) : Math.min(560, Math.round(vw * 0.36))
+    if (isMobile) {
+      setProjectModalStyle({
+        position: 'fixed',
+        top: '1rem',
+        left: '1rem',
+        width: 'calc(100vw - 2rem)',
+        maxHeight: 'calc(100dvh - 2rem)',
+      })
+      return
+    }
+
+    const width = Math.min(560, Math.round(vw * 0.36))
     const estimatedHeight = isMobile ? 520 : 460
 
     // Center of the rectangle you drew (middle of the 2x2 featured-project cards)
