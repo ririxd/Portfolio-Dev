@@ -88,12 +88,9 @@ function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [projectModalStyle, setProjectModalStyle] = useState({})
   const [expandedIndex, setExpandedIndex] = useState(null)
-  const [isLinkedInModalOpen, setIsLinkedInModalOpen] = useState(false)
-  const [linkedInModalStyle, setLinkedInModalStyle] = useState({})
 
   const projectsGridRef = useRef(null)
   const projectsSectionRef = useRef(null)
-  const linkedinButtonRef = useRef(null)
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
@@ -137,53 +134,6 @@ function PortfolioPage({ onBack }) {
       window.removeEventListener('scroll', sync)
     }
   }, [selectedProject])
-
-  const openLinkedInModal = () => {
-    const rect = linkedinButtonRef.current?.getBoundingClientRect()
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    const width = Math.min(520, vw - 16)
-
-    const left = rect
-      ? clamp(rect.left + rect.width / 2 - width / 2, 8, vw - width - 8)
-      : clamp(vw / 2 - width / 2, 8, vw - width - 8)
-
-    const top = rect
-      ? clamp(rect.top - 24, 24, vh - 520)
-      : clamp(vh / 2 - 240, 24, vh - 520)
-
-    setLinkedInModalStyle({
-      position: 'fixed',
-      left: `${Math.round(left)}px`,
-      top: `${Math.round(top)}px`,
-      width: `${Math.round(width)}px`,
-      maxHeight: '85vh',
-    })
-
-    setIsLinkedInModalOpen(true)
-  }
-
-  useEffect(() => {
-    if (!isLinkedInModalOpen) return
-
-    const parseBadge = () => {
-      if (window.IN && typeof window.IN.parse === 'function') window.IN.parse()
-    }
-
-    const existing = document.getElementById('linkedin-badge-script')
-    if (existing) {
-      parseBadge()
-      return
-    }
-
-    const script = document.createElement('script')
-    script.id = 'linkedin-badge-script'
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-    script.async = true
-    script.defer = true
-    script.onload = parseBadge
-    document.body.appendChild(script)
-  }, [isLinkedInModalOpen])
 
   return (
     <>
@@ -414,15 +364,15 @@ function PortfolioPage({ onBack }) {
                 <GithubIcon />
               </a>
 
-              <button
-                ref={linkedinButtonRef}
-                type="button"
+              <a
+                href="https://www.linkedin.com/in/ricardo-david-espinosa-b8451142b/"
+                target="_blank"
+                rel="noreferrer"
                 className="linkedin-button"
                 aria-label="Open LinkedIn profile"
-                onClick={openLinkedInModal}
               >
                 <LinkedinIcon />
-              </button>
+              </a>
 
             </div>
           </section>
@@ -477,48 +427,6 @@ function PortfolioPage({ onBack }) {
           </div>
         )}
 
-        {isLinkedInModalOpen && (
-          <div
-            className="linkedin-modal-overlay"
-            onClick={() => setIsLinkedInModalOpen(false)}
-          >
-            <div
-              className="linkedin-modal"
-              style={linkedInModalStyle}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                className="linkedin-modal-close"
-                aria-label="Close LinkedIn profile"
-                onClick={() => setIsLinkedInModalOpen(false)}
-              >
-                ×
-              </button>
-
-              <div className="linkedin-profile-card">
-                <div
-                  className="badge-base LI-profile-badge"
-                  data-locale="en_US"
-                  data-size="medium"
-                  data-theme="dark"
-                  data-type="HORIZONTAL"
-                  data-vanity="ricardo-david-espinosa-b8451142b"
-                  data-version="v1"
-                >
-                  <a
-                    className="badge-base__link LI-simple-link"
-                    href="https://ph.linkedin.com/in/ricardo-david-espinosa-b8451142b?trk=profile-badge"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Ricardo David Espinosa
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   )
