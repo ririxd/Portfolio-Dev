@@ -50,6 +50,7 @@ const skills = [
   { name: 'Java', logo: 'https://cdn.simpleicons.org/openjdk/ffffff' },
   { name: 'C++', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/cplusplus.svg' },
   { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/javascript.svg' },
+  { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/typescript.svg' },
   { name: 'React', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/react.svg' },
   { name: 'HTML', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/html5.svg' },
   { name: 'CSS', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11.0.0/icons/css3.svg' },
