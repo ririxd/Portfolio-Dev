@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import GithubIcon from './components/GithubIcon'
 import LinkedinIcon from './components/LinkedinIcon'
 
 const projects = [
@@ -403,8 +404,14 @@ function PortfolioPage({ onBack }) {
             </a>
 
             <div className="social-links">
-              <a href="https://github.com/ririxd" target="_blank" rel="noreferrer">
-                GitHub
+              <a
+                href="https://github.com/ririxd"
+                target="_blank"
+                rel="noreferrer"
+                className="github-button"
+                aria-label="Open GitHub profile"
+              >
+                <GithubIcon />
               </a>
 
               <button
