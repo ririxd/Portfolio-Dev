@@ -163,7 +163,7 @@ function PortfolioPage({ onBack }) {
             </div>
 
             <p className="section-text">
-              I'm a 21-year-old Computer Engineering student based in Manila, Philippines, I am a self-taught programmer and technology enthusiast with a strong interest in software development, networking,
+              I'm a 21-year-old Computer Engineering student based in Manila, Philippines. I am a self-taught programmer and technology enthusiast with a strong interest in software development, networking,
               embedded systems, and building tech related applications. Get to know me!
             </p>
           </section>
