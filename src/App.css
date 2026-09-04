@@ -593,7 +593,8 @@ button {
   transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.linkedin-button {
+.linkedin-button,
+.github-button {
   appearance: none;
   border: 0;
   display: inline-flex;
@@ -613,13 +614,20 @@ button {
 .social-links a:hover,
 .social-links a:focus-visible,
 .linkedin-button:hover,
-.linkedin-button:focus-visible {
+.linkedin-button:focus-visible,
+.github-button:hover,
+.github-button:focus-visible {
   color: var(--primary);
   text-shadow: 0 0 10px rgba(126, 231, 197, 0.75), 0 0 20px rgba(117, 210, 255, 0.4);
   transform: translateY(-1px);
 }
 
 .linkedin-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.github-button:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 4px;
 }
@@ -631,6 +639,16 @@ button {
 }
 
 .linkedin-icon svg {
+  display: block;
+}
+
+.github-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.github-icon svg {
   display: block;
 }
 

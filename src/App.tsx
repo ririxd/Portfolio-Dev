@@ -1,4 +1,5 @@
 import './App.css'
+import GithubIcon from './components/GithubIcon'
 import LinkedinIcon from './components/LinkedinIcon'
 
 type Project = {
@@ -339,8 +340,14 @@ function App() {
           </a>
 
           <div className="social-links">
-            <a href="https://github.com/" target="_blank" rel="noreferrer">
-              GitHub
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="github-button"
+              aria-label="Open GitHub profile"
+            >
+              <GithubIcon />
             </a>
 
             <a
