@@ -351,7 +351,7 @@ function App() {
             </a>
 
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/in/ricardo-david-espinosa-b8451142b/"
               target="_blank"
               rel="noreferrer"
               className="linkedin-button"
