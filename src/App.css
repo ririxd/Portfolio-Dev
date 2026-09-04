@@ -180,10 +180,46 @@ button {
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 1.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .section {
+  min-width: 0;
   padding: 1.2rem 0 0;
+}
+
+.section-about,
+.section-skills,
+.section-projects,
+.section-education,
+.section-research,
+.section-awards,
+.section-learning {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.section-about {
+  grid-column: 1 / -1;
+}
+
+.section-skills {
+  grid-column: span 4;
+}
+
+.section-projects {
+  grid-column: span 8;
+}
+
+.section-education,
+.section-research,
+.section-awards,
+.section-learning {
+  grid-column: span 6;
 }
 
 .section-heading {
@@ -537,9 +573,8 @@ button {
 }
 
 .contact-section {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 5rem 1.5rem 3rem;
+  grid-column: 1 / -1;
+  padding: 4rem 1.5rem 2rem;
   text-align: center;
 }
 
@@ -938,6 +973,7 @@ button {
 }
 
 .built-footer {
+  grid-column: 1 / -1;
   border-top: 1px solid var(--line);
   margin-top: 2rem;
   padding: 1.4rem 0 2rem;
@@ -1000,6 +1036,23 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
+  .portfolio-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .section-about,
+  .section-skills,
+  .section-projects,
+  .section-education,
+  .section-research,
+  .section-awards,
+  .section-learning,
+  .contact-section,
+  .built-footer {
+    grid-column: 1;
+  }
+
   .landing-panel {
     padding: 1rem;
     border-radius: 18px;

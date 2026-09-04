@@ -146,7 +146,7 @@ function PortfolioPage({ onBack }) {
         </div>
 
         <main className="portfolio-content">
-          <section id="about" className="section">
+          <section id="about" className="section section-about">
             <div className="section-heading section-heading-center">
               <h2>About Me</h2>
             </div>
@@ -157,7 +157,7 @@ function PortfolioPage({ onBack }) {
             </p>
           </section>
 
-          <section id="skills" className="section">
+          <section id="skills" className="section section-skills">
             <div className="section-heading">
               <h2>Skills</h2>
             </div>
@@ -172,7 +172,7 @@ function PortfolioPage({ onBack }) {
             </div>
           </section>
 
-          <section id="projects" className="section" ref={projectsSectionRef}>
+          <section id="projects" className="section section-projects" ref={projectsSectionRef}>
             <div className="section-heading">
               <h2>Featured Projects</h2>
             </div>
@@ -214,7 +214,7 @@ function PortfolioPage({ onBack }) {
             </div>
           </section>
 
-          <section id="education" className="section">
+          <section id="education" className="section section-education">
             <div className="section-heading">
               <h2>Education</h2>
             </div>
@@ -249,7 +249,7 @@ function PortfolioPage({ onBack }) {
             </div>
           </section>
 
-          <section className="section">
+          <section className="section section-research">
             <div className="section-heading">
               <h2>Researches Conducted</h2>
             </div>
@@ -278,7 +278,7 @@ function PortfolioPage({ onBack }) {
             </div>
           </section>
 
-          <section className="section">
+          <section className="section section-awards">
             <div className="section-heading">
               <h2>Awards</h2>
             </div>
@@ -315,7 +315,7 @@ function PortfolioPage({ onBack }) {
             </div>
           </section>
 
-          <section className="section learning-section">
+          <section className="section section-learning learning-section">
             <div className="section-heading">
               <h2>Currently Learning</h2>
             </div>
