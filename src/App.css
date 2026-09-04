@@ -596,6 +596,11 @@ button {
 .linkedin-button {
   appearance: none;
   border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   background: transparent;
   color: var(--text);
@@ -612,6 +617,21 @@ button {
   color: var(--primary);
   text-shadow: 0 0 10px rgba(126, 231, 197, 0.75), 0 0 20px rgba(117, 210, 255, 0.4);
   transform: translateY(-1px);
+}
+
+.linkedin-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.linkedin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkedin-icon svg {
+  display: block;
 }
 
 /* LinkedIn modal */

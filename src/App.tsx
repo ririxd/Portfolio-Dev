@@ -1,4 +1,5 @@
 import './App.css'
+import LinkedinIcon from './components/LinkedinIcon'
 
 type Project = {
   title: string
@@ -342,8 +343,14 @@ function App() {
               GitHub
             </a>
 
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
-              LinkedIn
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="linkedin-button"
+              aria-label="Open LinkedIn profile"
+            >
+              <LinkedinIcon />
             </a>
 
             <a href="mailto:your-email@gmail.com">Email</a>

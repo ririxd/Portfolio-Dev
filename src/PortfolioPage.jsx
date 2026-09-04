@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import LinkedinIcon from './components/LinkedinIcon'
 
 const projects = [
   {
@@ -410,9 +411,10 @@ function PortfolioPage({ onBack }) {
                 ref={linkedinButtonRef}
                 type="button"
                 className="linkedin-button"
+                aria-label="Open LinkedIn profile"
                 onClick={openLinkedInModal}
               >
-                LinkedIn
+                <LinkedinIcon />
               </button>
 
             </div>
