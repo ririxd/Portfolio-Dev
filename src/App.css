@@ -459,8 +459,31 @@ button {
 }
 
 .research-links a {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(126, 231, 197, 0.45);
+  border-radius: 10px;
+  background: rgba(126, 231, 197, 0.08);
   color: var(--primary);
   font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.research-links a:hover,
+.research-links a:focus-visible {
+  border-color: var(--primary);
+  background: rgba(126, 231, 197, 0.2);
+  color: #b8ffe9;
+  text-shadow: 0 0 12px rgba(126, 231, 197, 0.65);
+  box-shadow: 0 8px 20px rgba(126, 231, 197, 0.2);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.research-links a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
 }
 
 .awards-grid {
