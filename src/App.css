@@ -650,6 +650,28 @@ button {
 
 .github-icon svg {
   display: block;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.github-button:hover .github-icon svg,
+.github-button:focus-visible .github-icon svg {
+  animation: githubIconBounce 0.55s ease;
+}
+
+@keyframes githubIconBounce {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  45% {
+    transform: scale(1.08) rotate(-4deg);
+  }
+  75% {
+    transform: scale(1.08) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
 }
 
 /* LinkedIn modal */
