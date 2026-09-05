@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   font-weight: 500;
-  color: #e5eefb;
+  color: #ffffff;
 }
 
 h1,
@@ -37,6 +37,6 @@ h4 {
 }
 
 ::selection {
-  background: #64ffda;
-  color: #08090d;
+  background: #ffff00;
+  color: #000000;
 }

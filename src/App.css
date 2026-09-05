@@ -1,10 +1,14 @@
 :root {
-  --bg: #0b1020;
-  --bg-soft: #111827;
-  --text: #e5eefb;
-  --muted: #a9b7cc;
-  --primary: #7ee7c5;
-  --line: #243041;
+  --bg: #000000;
+  --bg-soft: #0b0b0b;
+  --surface: #111111;
+  --surface-raised: #1a1a1a;
+  --text: #ffffff;
+  --muted: #d4d4d4;
+  --primary: #00ffff;
+  --secondary: #ffff00;
+  --accent: #ff9d00;
+  --line: #6fc3df;
   --project-modal-mobile-top: 120px;
   --project-modal-right: 36px;
 }
@@ -76,19 +80,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #071522;
+  background: #000000;
   padding: 3rem 1.5rem;
 }
 
 .landing-panel {
   width: min(1180px, 100%);
-  border: 1px solid rgba(118, 220, 255, 0.3);
+  border: 1px solid var(--primary);
   border-radius: 28px;
-  background: rgba(11, 16, 32, 0.72);
-  box-shadow:
-    0 0 0 1px rgba(126, 231, 197, 0.15),
-    0 0 18px rgba(126, 231, 197, 0.18),
-    0 0 34px rgba(117, 210, 255, 0.12);
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--primary);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   padding: 2rem 2.5rem;
@@ -132,26 +133,26 @@ button {
 .landing-button {
   margin-top: 2rem;
   border: none;
-  background: linear-gradient(135deg, #7ee7c5 0%, #75d2ff 100%);
-  color: #08111b;
+  background: var(--primary);
+  color: #000000;
   border-radius: 999px;
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 800; /* already bold, keep */
   cursor: pointer;
-  box-shadow: 0 0 18px rgba(126, 231, 197, 0.35);
+  box-shadow: 5px 5px 0 var(--secondary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .landing-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 24px rgba(117, 210, 255, 0.42);
+  box-shadow: 2px 2px 0 var(--secondary);
 }
 
 .return-button {
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-raised);
   color: var(--text);
   padding: 0.7rem 1.1rem;
   cursor: pointer;
@@ -160,7 +161,8 @@ button {
 
 .return-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(18, 143, 183, 0.18);
+  border-color: var(--primary);
+  box-shadow: 4px 4px 0 var(--primary);
 }
 
 .portfolio-page {
@@ -200,7 +202,7 @@ button {
   padding: 1.5rem;
   border: 1px solid var(--line);
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--surface);
 }
 
 .section-about {
@@ -257,11 +259,11 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid #243041;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.75rem 1rem;
-  color: #e5eefb;
+  color: var(--text);
   min-height: 52px;
 }
 
@@ -281,7 +283,7 @@ button {
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 1.5rem;
@@ -290,7 +292,7 @@ button {
 
 .project-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(126, 231, 197, 0.5);
+  border-color: var(--primary);
 }
 
 .project-top {
@@ -305,8 +307,8 @@ button {
 }
 
 .project-category {
-  background: rgba(126, 231, 197, 0.08);
-  border: 1px solid rgba(126, 231, 197, 0.2);
+  background: #003333;
+  border: 1px solid var(--primary);
   color: var(--primary);
   border-radius: 999px;
   padding: 0.45rem 0.7rem;
@@ -332,11 +334,11 @@ button {
 }
 
 .technology-list span {
-  background: rgba(117, 210, 255, 0.08);
-  border: 1px solid rgba(117, 210, 255, 0.2);
-  border-radius: 999px;
+  background: #102b35;
+  border: 1px solid var(--line);
+  border-radius: 2px;
   padding: 0.45rem 0.7rem;
-  color: #8ed7ff;
+  color: var(--text);
   font-size: 0.8rem;
 }
 
@@ -352,9 +354,9 @@ button {
 .details-button {
   display: inline-block;
   padding: 0.7rem 1rem;
-  border: 1px solid rgba(126, 231, 197, 0.45);
-  border-radius: 10px;
-  background: rgba(126, 231, 197, 0.08);
+  border: 1px solid var(--primary);
+  border-radius: 2px;
+  background: #003333;
   color: var(--text);
   font-weight: 700;
   cursor: pointer;
@@ -368,11 +370,11 @@ button {
 .project-links a:focus-visible,
 .details-button:hover,
 .details-button:focus-visible {
-  border-color: var(--primary);
-  background: rgba(126, 231, 197, 0.2);
-  color: #b8ffe9;
-  text-shadow: 0 0 12px rgba(126, 231, 197, 0.65);
-  box-shadow: 0 8px 20px rgba(126, 231, 197, 0.2);
+  border-color: var(--secondary);
+  background: var(--primary);
+  color: #000000;
+  text-shadow: none;
+  box-shadow: 4px 4px 0 var(--secondary);
   transform: translateY(-3px) scale(1.02);
 }
 
@@ -386,7 +388,7 @@ button {
   position: relative;
   margin-top: 1.5rem;
   padding-left: 1.5rem;
-  border-left: 2px solid var(--line);
+  border-left: 2px solid var(--primary);
 }
 
 .timeline-item {
@@ -401,11 +403,12 @@ button {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--secondary);
+  border: 2px solid #000000;
 }
 
 .timeline-content {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 1.4rem 1.25rem;
@@ -424,7 +427,7 @@ button {
 
 .timeline-content h4 {
   margin: 0 0 0.7rem;
-  color: #dfeaf8;
+  color: var(--secondary);
 }
 
 .timeline-content p {
@@ -434,7 +437,7 @@ button {
 }
 
 .research-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 1.5rem;
@@ -483,9 +486,9 @@ button {
 .research-links a {
   display: inline-block;
   padding: 0.7rem 1rem;
-  border: 1px solid rgba(126, 231, 197, 0.45);
-  border-radius: 10px;
-  background: rgba(126, 231, 197, 0.08);
+  border: 1px solid var(--primary);
+  border-radius: 2px;
+  background: #003333;
   color: var(--primary);
   font-weight: 700;
   cursor: pointer;
@@ -495,11 +498,11 @@ button {
 
 .research-links a:hover,
 .research-links a:focus-visible {
-  border-color: var(--primary);
-  background: rgba(126, 231, 197, 0.2);
-  color: #b8ffe9;
-  text-shadow: 0 0 12px rgba(126, 231, 197, 0.65);
-  box-shadow: 0 8px 20px rgba(126, 231, 197, 0.2);
+  border-color: var(--secondary);
+  background: var(--primary);
+  color: #000000;
+  text-shadow: none;
+  box-shadow: 4px 4px 0 var(--secondary);
   transform: translateY(-3px) scale(1.02);
 }
 
@@ -516,7 +519,7 @@ button {
 }
 
 .award-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 1.5rem;
@@ -550,9 +553,9 @@ button {
 .award-links a {
   display: inline-block;
   padding: 0.7rem 1rem;
-  border: 1px solid rgba(126, 231, 197, 0.45);
-  border-radius: 10px;
-  background: rgba(126, 231, 197, 0.08);
+  border: 1px solid var(--primary);
+  border-radius: 2px;
+  background: #003333;
   color: var(--primary);
   font-weight: 700;
   transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
@@ -561,11 +564,11 @@ button {
 
 .award-links a:hover,
 .award-links a:focus-visible {
-  border-color: var(--primary);
-  background: rgba(126, 231, 197, 0.2);
-  color: #b8ffe9;
-  text-shadow: 0 0 12px rgba(126, 231, 197, 0.65);
-  box-shadow: 0 8px 20px rgba(126, 231, 197, 0.2);
+  border-color: var(--secondary);
+  background: var(--primary);
+  color: #000000;
+  text-shadow: none;
+  box-shadow: 4px 4px 0 var(--secondary);
   transform: translateY(-3px) scale(1.02);
 }
 
@@ -586,7 +589,7 @@ button {
 }
 
 .learning-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 1.5rem;
@@ -600,8 +603,8 @@ button {
 .learning-card:focus,
 .learning-card.expanded {
   transform: translateY(-3px) scale(1.01);
-  border-color: rgba(126, 231, 197, 0.5);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  border-color: var(--primary);
+  box-shadow: 6px 6px 0 var(--secondary);
 }
 
 .learning-card span {
@@ -667,17 +670,17 @@ button {
 
 .contact-section .primary-button {
   margin-top: 1.8rem;
-  background: linear-gradient(135deg, #7ee7c5 0%, #75d2ff 100%);
-  color: #08111b;
+  background: var(--primary);
+  color: #000000;
   border: none;
   border-radius: 999px;
-  box-shadow: 0 10px 24px rgba(117, 210, 255, 0.24);
+  box-shadow: 5px 5px 0 var(--secondary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .contact-section .primary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(117, 210, 255, 0.32);
+  box-shadow: 2px 2px 0 var(--secondary);
 }
 
 .social-links {
@@ -719,8 +722,8 @@ button {
 .linkedin-button:focus-visible,
 .github-button:hover,
 .github-button:focus-visible {
-  color: var(--primary);
-  text-shadow: 0 0 10px rgba(126, 231, 197, 0.75), 0 0 20px rgba(117, 210, 255, 0.4);
+  color: var(--secondary);
+  text-shadow: 0 0 8px var(--secondary);
   transform: translateY(-1px);
 }
 
@@ -785,7 +788,7 @@ button {
   justify-content: center;
   align-items: flex-end;      /* bottom */
   padding: 1rem 1rem 2rem;    /* bottom gap above section */
-  background: rgba(7, 12, 19, 0.78);
+  background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
@@ -796,10 +799,10 @@ button {
   max-height: min(78vh, calc(100vh - 120px));
   overflow-y: auto;
   padding: 2.8rem 1.25rem 2rem;
-  border: 1px solid rgba(126, 231, 197, 0.55);
+  border: 1px solid var(--primary);
   border-radius: 24px;
-  background: #111827;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -851,7 +854,7 @@ button {
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-raised);
   color: var(--text);
   font-size: 1.5rem;
   line-height: 1;
@@ -867,7 +870,7 @@ button {
   place-items: center;
   padding: 1rem;
   overflow-y: auto;
-  background: rgba(7, 12, 19, 0.72);
+  background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
@@ -878,11 +881,11 @@ button {
   box-sizing: border-box;
   overflow-y: auto;
   width: min(680px, 92vw);
-  background: rgba(15, 23, 38, 0.98);
-  border: 1px solid rgba(126, 231, 197, 0.35);
-  border-radius: 22px;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  border-radius: 4px;
   padding: 2rem 1.5rem 1.5rem;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+  box-shadow: 8px 8px 0 var(--secondary);
   opacity: 0;
   transform: translateY(22px) scale(0.96);
   animation: modalIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -916,8 +919,8 @@ button {
 .modal-category {
   display: inline-block;
   width: fit-content;
-  background: rgba(126, 231, 197, 0.08);
-  border: 1px solid rgba(126, 231, 197, 0.2);
+  background: #003333;
+  border: 1px solid var(--primary);
   color: var(--primary);
   border-radius: 999px;
   padding: 0.45rem 0.7rem;
@@ -964,7 +967,7 @@ button {
 }
 
 .modal-actions a {
-  color: var(--primary);
+  color: var(--secondary);
   font-weight: 700;
   text-decoration: none;
   transform: translateY(4px);
@@ -1022,26 +1025,26 @@ button {
 }
 
 .primary-button {
-  background: linear-gradient(135deg, #7ee7c5 0%, #75d2ff 100%);
-  color: #08111b;
+  background: var(--primary);
+  color: #000000;
   border: none;
-  box-shadow: 0 10px 24px rgba(117, 210, 255, 0.24);
+  box-shadow: 5px 5px 0 var(--secondary);
 }
 
 .primary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(117, 210, 255, 0.32);
+  box-shadow: 2px 2px 0 var(--secondary);
 }
 
 .secondary-button {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
   color: var(--text);
 }
 
 .secondary-button:hover {
   transform: translateY(-1px);
-  border-color: rgba(126, 231, 197, 0.5);
+  border-color: var(--primary);
 }
 
 .built-footer {
