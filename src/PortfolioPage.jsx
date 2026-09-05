@@ -85,6 +85,56 @@ const learningItems = [
   },
 ]
 
+function GlareSkillCard({ skill }) {
+  const isPointerInside = useRef(false)
+  const cardRef = useRef(null)
+
+  const updateCardStyles = (event) => {
+    const card = cardRef.current
+    if (!card) return
+
+    const rect = card.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+    const deltaX = x - 50
+    const deltaY = y - 50
+
+    card.style.setProperty('--glare-x', `${x}%`)
+    card.style.setProperty('--glare-y', `${y}%`)
+    card.style.setProperty('--bg-x', `${50 + x / 4 - 12.5}%`)
+    card.style.setProperty('--bg-y', `${50 + y / 3 - 16.67}%`)
+    card.style.setProperty('--rotate-x', `${-(deltaX / 3.5) * 0.4}deg`)
+    card.style.setProperty('--rotate-y', `${(deltaY / 2) * 0.4}deg`)
+  }
+
+  return (
+    <div
+      ref={cardRef}
+      className="skill-card"
+      onPointerMove={updateCardStyles}
+      onPointerEnter={() => {
+        isPointerInside.current = true
+        cardRef.current?.style.setProperty('--glare-active', '1')
+      }}
+      onPointerLeave={() => {
+        isPointerInside.current = false
+        const card = cardRef.current
+        if (!card) return
+        card.style.setProperty('--glare-active', '0')
+        card.style.setProperty('--rotate-x', '0deg')
+        card.style.setProperty('--rotate-y', '0deg')
+      }}
+    >
+      <div className="skill-card-content">
+        <img src={skill.logo} alt={skill.name} className="skill-logo" />
+        <span>{skill.name}</span>
+      </div>
+      <div className="skill-card-glare" aria-hidden="true" />
+      <div className="skill-card-foil" aria-hidden="true" />
+    </div>
+  )
+}
+
 function PortfolioPage({ onBack }) {
   const [selectedProject, setSelectedProject] = useState(null)
   const [projectModalStyle, setProjectModalStyle] = useState({})
@@ -175,10 +225,7 @@ function PortfolioPage({ onBack }) {
 
             <div className="skills-grid">
               {skills.map((skill) => (
-                <div key={skill.name} className="skill-card">
-                  <img src={skill.logo} alt={skill.name} className="skill-logo" />
-                  <span>{skill.name}</span>
-                </div>
+                <GlareSkillCard key={skill.name} skill={skill} />
               ))}
             </div>
           </section>

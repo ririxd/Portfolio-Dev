@@ -256,23 +256,107 @@ button {
 }
 
 .skill-card {
+  --glare-x: 50%;
+  --glare-y: 50%;
+  --bg-x: 50%;
+  --bg-y: 50%;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --glare-active: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--surface-raised);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.75rem 1rem;
   color: var(--text);
   min-height: 52px;
+  transform: perspective(600px) rotateY(var(--rotate-x)) rotateX(var(--rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 300ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  will-change: transform;
+}
+
+.skill-card:hover {
+  border-color: var(--primary);
+  box-shadow: 4px 4px 0 var(--secondary);
+}
+
+.skill-card-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.skill-card-glare,
+.skill-card-foil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: var(--glare-active);
+  transition: opacity 300ms ease;
+}
+
+.skill-card-glare {
+  z-index: 1;
+  background: radial-gradient(
+    farthest-corner circle at var(--glare-x) var(--glare-y),
+    rgba(255, 255, 255, 0.8) 10%,
+    rgba(255, 255, 255, 0.3) 28%,
+    rgba(255, 255, 255, 0) 78%
+  );
+  mix-blend-mode: screen;
+}
+
+.skill-card-foil {
+  z-index: 3;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 119, 115, 0.9) 0%,
+      rgba(255, 237, 95, 0.9) 15%,
+      rgba(168, 255, 95, 0.9) 30%,
+      rgba(131, 255, 247, 0.9) 45%,
+      rgba(120, 148, 255, 0.9) 60%,
+      rgba(216, 117, 255, 0.9) 75%,
+      rgba(255, 119, 115, 0.9) 90%
+    ) var(--bg-x) var(--bg-y) / 200% 700% no-repeat;
+  mix-blend-mode: color-dodge;
+  filter: saturate(1.3) contrast(1.1);
 }
 
 .skill-logo {
+  position: relative;
+  z-index: 4;
   width: 22px;
   height: 22px;
   object-fit: contain;
   display: block;
   filter: brightness(0) invert(1);
+}
+
+.skill-card-content span {
+  position: relative;
+  z-index: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card {
+    transform: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .skill-card-glare,
+  .skill-card-foil {
+    display: none;
+  }
 }
 
 .projects-grid {
