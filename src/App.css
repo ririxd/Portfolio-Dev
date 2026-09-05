@@ -745,6 +745,41 @@ button {
   margin: 1rem 0 0.8rem;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800; /* added */
+  color: transparent;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffffff 40%,
+    rgba(0, 255, 255, 0.9) 48%,
+    rgba(255, 255, 0, 0.9) 51%,
+    #ffffff 60%,
+    #ffffff 100%
+  );
+  background-size: 240% 100%;
+  background-position: 120% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: passiveHeadingGlare 6s ease-in-out infinite;
+}
+
+@keyframes passiveHeadingGlare {
+  0%,
+  55% {
+    background-position: 120% 0;
+  }
+
+  75%,
+  100% {
+    background-position: -20% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-section h2 {
+    color: var(--text);
+    background: none;
+    animation: none;
+  }
 }
 
 .contact-section p {
