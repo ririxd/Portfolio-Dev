@@ -759,6 +759,7 @@ button {
   background-position: 120% 0;
   background-clip: text;
   -webkit-background-clip: text;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.3));
   animation: passiveHeadingGlare 6s ease-in-out infinite;
 }
 
@@ -766,11 +767,18 @@ button {
   0%,
   55% {
     background-position: 120% 0;
+    filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.3));
   }
 
-  75%,
+  75% {
+    background-position: -20% 0;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8))
+      drop-shadow(0 0 16px rgba(255, 255, 0, 0.45));
+  }
+
   100% {
     background-position: -20% 0;
+    filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.3));
   }
 }
 
