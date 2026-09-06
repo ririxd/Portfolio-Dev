@@ -848,8 +848,9 @@ button {
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  transition: width 0.5s ease, color 0.5s ease, transform 0.2s ease,
-    box-shadow 0.5s ease;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s ease;
 }
 
 .linkedin-button::before,
@@ -861,7 +862,7 @@ button {
   background: linear-gradient(45deg, var(--gradient-from), var(--gradient-to));
   content: '';
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
 .linkedin-button::after,
@@ -877,7 +878,7 @@ button {
   content: '';
   filter: blur(15px);
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
 .social-links a:hover,
@@ -945,7 +946,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.5s ease;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .social-button-label {
@@ -955,14 +957,16 @@ button {
   font-size: 0.875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  opacity: 0;
   transform: scale(0);
-  transition: transform 0.5s ease 0.15s;
+  transition: opacity 0.3s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .linkedin-button:hover .social-button-icon,
 .linkedin-button:focus-visible .social-button-icon,
 .github-button:hover .social-button-icon,
 .github-button:focus-visible .social-button-icon {
+  opacity: 0;
   transform: scale(0);
 }
 
@@ -970,6 +974,7 @@ button {
 .linkedin-button:focus-visible .social-button-label,
 .github-button:hover .social-button-label,
 .github-button:focus-visible .social-button-label {
+  opacity: 1;
   transform: scale(1);
 }
 
