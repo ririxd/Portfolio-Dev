@@ -419,8 +419,12 @@ function PortfolioPage({ onBack }) {
                 rel="noreferrer"
                 className="github-button"
                 aria-label="Open GitHub profile"
+                style={{ '--gradient-from': '#a955ff', '--gradient-to': '#ea51ff' }}
               >
-                <GithubIcon />
+                <span className="social-button-icon">
+                  <GithubIcon />
+                </span>
+                <span className="social-button-label">GitHub</span>
               </a>
 
               <a
@@ -429,8 +433,12 @@ function PortfolioPage({ onBack }) {
                 rel="noreferrer"
                 className="linkedin-button"
                 aria-label="Open LinkedIn profile"
+                style={{ '--gradient-from': '#56ccf2', '--gradient-to': '#2f80ed' }}
               >
-                <LinkedinIcon />
+                <span className="social-button-icon">
+                  <LinkedinIcon />
+                </span>
+                <span className="social-button-label">LinkedIn</span>
               </a>
 
             </div>
