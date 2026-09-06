@@ -193,8 +193,8 @@ button {
   width: 75vw;
   height: 55vh;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.18;
+  filter: blur(55px);
+  opacity: 0.38;
   will-change: transform;
 }
 
