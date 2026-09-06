@@ -166,8 +166,74 @@ button {
 }
 
 .portfolio-page {
+  position: relative;
   background: var(--bg);
   min-height: 100vh;
+  isolation: isolate;
+}
+
+.portfolio-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.portfolio-aurora::after {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 255, 255, 0.08), transparent 42%);
+  content: '';
+}
+
+.portfolio-aurora-layer {
+  position: absolute;
+  width: 75vw;
+  height: 55vh;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.18;
+  will-change: transform;
+}
+
+.portfolio-aurora-layer-one {
+  top: -20%;
+  left: -12%;
+  background: radial-gradient(ellipse, var(--primary) 0%, var(--line) 28%, transparent 70%);
+  animation: portfolioAuroraOne 18s ease-in-out infinite alternate;
+}
+
+.portfolio-aurora-layer-two {
+  right: -15%;
+  bottom: -18%;
+  background: radial-gradient(ellipse, var(--accent) 0%, var(--secondary) 24%, transparent 70%);
+  animation: portfolioAuroraTwo 22s ease-in-out infinite alternate;
+}
+
+@keyframes portfolioAuroraOne {
+  from {
+    transform: translate3d(-4%, -2%, 0) rotate(-8deg) scale(0.95);
+  }
+  to {
+    transform: translate3d(24%, 16%, 0) rotate(12deg) scale(1.15);
+  }
+}
+
+@keyframes portfolioAuroraTwo {
+  from {
+    transform: translate3d(5%, 2%, 0) rotate(10deg) scale(1.05);
+  }
+  to {
+    transform: translate3d(-22%, -18%, 0) rotate(-14deg) scale(1.2);
+  }
+}
+
+.portfolio-topbar,
+.portfolio-content {
+  position: relative;
+  z-index: 1;
 }
 
 .portfolio-topbar {

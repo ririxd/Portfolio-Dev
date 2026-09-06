@@ -200,6 +200,11 @@ function PortfolioPage({ onBack }) {
   return (
     <>
       <div className="portfolio-page">
+        <div className="portfolio-aurora" aria-hidden="true">
+          <div className="portfolio-aurora-layer portfolio-aurora-layer-one" />
+          <div className="portfolio-aurora-layer portfolio-aurora-layer-two" />
+        </div>
+
         <div className="portfolio-topbar">
           <button className="return-button" onClick={onBack}>
             Return
