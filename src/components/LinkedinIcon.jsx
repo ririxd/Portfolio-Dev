@@ -31,8 +31,8 @@ function LinkedinIcon({ size = 28, duration = 1, isAnimated = true, color = 'cur
         variants={{
           normal: { scale: 1 },
           animate: {
-            scale: [1, 1.08, 1],
-            transition: { duration: 0.45 * duration, ease: 'easeOut' },
+            scale: [1, 1.03, 1],
+            transition: { duration: 0.65 * duration, ease: 'easeOut' },
           },
         }}
       >
@@ -41,9 +41,9 @@ function LinkedinIcon({ size = 28, duration = 1, isAnimated = true, color = 'cur
           variants={{
             normal: { pathLength: 1, opacity: 1 },
             animate: {
-              pathLength: [0.3, 1],
-              opacity: [0.6, 1],
-              transition: { duration: 0.6 * duration, ease: 'easeInOut' },
+              pathLength: [0.75, 1],
+              opacity: [0.85, 1],
+              transition: { duration: 0.8 * duration, ease: 'easeInOut' },
             },
           }}
         />
@@ -55,11 +55,11 @@ function LinkedinIcon({ size = 28, duration = 1, isAnimated = true, color = 'cur
           variants={{
             normal: { pathLength: 1, opacity: 1 },
             animate: {
-              pathLength: [0, 1],
-              opacity: [0, 1],
+              pathLength: [0.7, 1],
+              opacity: [0.8, 1],
               transition: {
-                duration: 0.45 * duration,
-                delay: 0.12 * duration,
+                duration: 0.7 * duration,
+                delay: 0.16 * duration,
                 ease: 'easeInOut',
               },
             },
@@ -72,11 +72,11 @@ function LinkedinIcon({ size = 28, duration = 1, isAnimated = true, color = 'cur
           variants={{
             normal: { pathLength: 1, opacity: 1 },
             animate: {
-              pathLength: [0, 1],
-              opacity: [0, 1],
+              pathLength: [0.7, 1],
+              opacity: [0.8, 1],
               transition: {
-                duration: 0.45 * duration,
-                delay: 0.12 * duration,
+                duration: 0.7 * duration,
+                delay: 0.16 * duration,
                 ease: 'easeInOut',
               },
             },

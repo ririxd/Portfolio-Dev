@@ -983,10 +983,10 @@ button {
     transform: scale(1) rotate(0);
   }
   45% {
-    transform: scale(1.08) rotate(-4deg);
+    transform: scale(1.03) rotate(-1deg);
   }
   75% {
-    transform: scale(1.08) rotate(4deg);
+    transform: scale(1.03) rotate(1deg);
   }
   100% {
     transform: scale(1) rotate(0);
