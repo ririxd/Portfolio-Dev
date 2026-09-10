@@ -1,6 +1,7 @@
 import './App.css'
 import GithubIcon from './components/GithubIcon'
 import LinkedinIcon from './components/LinkedinIcon'
+import { Analytics } from '@vercel/analytics/react'
 
 type Project = {
   title: string
@@ -372,6 +373,7 @@ function App() {
 
         <p>Built with React + TypeScript</p>
       </footer>
+      <Analytics />
     </div>
   )
 }
