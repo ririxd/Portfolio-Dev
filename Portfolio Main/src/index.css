@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+strong,
+b,
+button,
+a {
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.03em;
+}
+
+::selection {
+  background: #ffff00;
+  color: #000000;
+}
