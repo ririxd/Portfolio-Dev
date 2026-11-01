@@ -358,7 +358,7 @@ function PortfolioPage({ onBack }) {
               </div>
 
               <div className="award-card">
-                <span className="award-badge">2025</span>
+                <span className="award-badge">2026</span>
                 <h3>IT Customer Support Basics</h3>
                 <p>
                   Completed the IT Customer Support Basics under CISCO Networking Academy,
@@ -377,7 +377,7 @@ function PortfolioPage({ onBack }) {
               </div>
 
               <div className="award-card">
-                <span className="award-badge">2025</span>
+                <span className="award-badge">2026</span>
                 <h3>Data Analytics Essentials</h3>
                 <p>
                   Completed the Data Analytics Essentials certification, building
