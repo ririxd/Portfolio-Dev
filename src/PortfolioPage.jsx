@@ -64,10 +64,10 @@ const skills = [
 const learningItems = [
   {
     id: 1,
-    title: 'React & TypeScript',
-    short: 'Building modern, maintainable frontend applications.',
+    title: 'AI & Machine Learning',
+    short: 'Exploring intelligent systems, data, and machine learning models.',
     detail:
-      'Focused on reusable components, type safety, and scalable frontend architecture.',
+      'Learning machine learning fundamentals, model development, and practical AI applications.',
   },
   {
     id: 2,
