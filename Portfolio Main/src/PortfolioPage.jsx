@@ -375,6 +375,25 @@ function PortfolioPage({ onBack }) {
                   </a>
                 </div>
               </div>
+
+              <div className="award-card">
+                <span className="award-badge">2025</span>
+                <h3>Data Analytics Essentials</h3>
+                <p>
+                  Completed the Data Analytics Essentials certification, building
+                  foundational skills in data analysis and interpretation.
+                </p>
+
+                <div className="award-links">
+                  <a
+                    href="https://www.credly.com/badges/4172f43d-99f6-4c7d-8ba5-524acdee6463"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Badge
+                  </a>
+                </div>
+              </div>
             </div>
           </section>
 
